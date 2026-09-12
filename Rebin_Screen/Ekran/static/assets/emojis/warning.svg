@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="warnGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFCA28"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <path d="M21.5 5.5 C22.8 3.2, 25.2 3.2, 26.5 5.5 L45.2 38.5 C46.5 40.8, 45.3 43, 42.7 43 L5.3 43 C2.7 43, 1.5 40.8, 2.8 38.5 Z" fill="url(#warnGrad)" stroke="#E65100" stroke-width="2"/>
+  <circle cx="24" cy="36" r="2.8" fill="#212121"/>
+  <line x1="24" y1="16" x2="24" y2="29" stroke="#212121" stroke-width="4.5" stroke-linecap="round"/>
+</svg>

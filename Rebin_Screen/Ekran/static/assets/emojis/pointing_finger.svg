@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="70%" stop-color="#FFCA28"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <radialGradient id="tapRipple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4CAF50" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="24" cy="5" r="5" fill="url(#tapRipple)"/>
+  <circle cx="24" cy="5" r="2.5" fill="#4CAF50"/>
+  <!-- Pointing Finger -->
+  <rect x="20" y="5" width="8" height="22" rx="4" fill="url(#skin)" stroke="#FF8F00" stroke-width="1.2"/>
+  <!-- Hand Body -->
+  <path d="M14 20 C12 20, 11 23, 11 27 L11 36 C11 44, 37 44, 37 36 L37 26 C37 23, 33 23, 33 26 L33 24 C33 21, 29 21, 29 24 L29 21 C29 18, 25 18, 25 21 L25 26 L20 26 L20 23 C20 20, 14 20, 14 20 Z" fill="url(#skin)" stroke="#FF8F00" stroke-width="1.2"/>
+  <!-- Creases -->
+  <line x1="22" y1="12" x2="26" y2="12" stroke="#FF8F00" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="22" y1="17" x2="26" y2="17" stroke="#FF8F00" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

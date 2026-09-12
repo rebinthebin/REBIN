@@ -1,0 +1,15 @@
+[Unit]
+Description=REBIN Hailo 8 Recycling Detector Service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=rebin
+WorkingDirectory=/home/rebin/Desktop/REBIN
+ExecStart=/home/rebin/Desktop/REBIN/run_hailo.sh headless --roi-crop 0.1 0.9 0.15 0.85 --settle-delay 3 --cooldown 5.0
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

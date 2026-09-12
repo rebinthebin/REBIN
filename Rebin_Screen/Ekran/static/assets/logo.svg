@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 100" width="340" height="100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="100%" stop-color="#2E7D32" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <circle cx="40" cy="40" r="38" fill="#E8F5E9" stroke="#C8E6C9" stroke-width="2"/>
+    <path d="M 40 14 L 50 30 L 38 30 A 16 16 0 0 0 25 41 L 17 36 A 25 25 0 0 1 40 14 Z" fill="#4CAF50" />
+    <path d="M 63 41 A 16 16 0 0 1 47 62 L 52 69 A 25 25 0 0 0 71 41 Z" fill="#2E7D32" />
+    <path d="M 61 60 L 61 79 L 49 69 Z" fill="#2E7D32" />
+    <path d="M 36 62 A 16 16 0 0 1 25 45 L 17 50 A 25 25 0 0 0 34 71 Z" fill="#43A047" />
+    <path d="M 16 43 L 6 34 L 22 30 Z" fill="#43A047" />
+    <circle cx="40" cy="40" r="8" fill="#4CAF50" opacity="0.9"/>
+  </g>
+  <text x="110" y="58" font-family="'Outfit', 'Inter', system-ui, sans-serif" font-size="44" font-weight="900" letter-spacing="3" fill="#212121">
+    REB<tspan fill="#4CAF50">İ</tspan>N
+  </text>
+  <text x="112" y="80" font-family="'Outfit', 'Inter', system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="2" fill="#757575">
+    AKILLI GERİ DÖNÜŞÜM
+  </text>
+</svg>

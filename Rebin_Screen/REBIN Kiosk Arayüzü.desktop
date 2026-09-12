@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=REBIN Kiosk Arayüzü
+Comment=REBIN Dokunmatik Ekran + Yapay Zeka Algılayıcı (1280x720)
+Exec=/bin/bash /home/rebin/Desktop/REBIN/start_presentation.sh
+Icon=/home/rebin/Desktop/Ekran/static/assets/logo.png
+Terminal=false
+Categories=Utility;Application;

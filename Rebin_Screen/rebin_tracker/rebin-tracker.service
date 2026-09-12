@@ -1,0 +1,16 @@
+[Unit]
+Description=REBIN Camera Watcher & Supabase Image Sync Service (Raspberry Pi 5)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/rebin_tracker
+ExecStart=/home/pi/rebin_tracker/venv/bin/python /home/pi/rebin_tracker/main.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

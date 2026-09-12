@@ -1,0 +1,402 @@
+/* ==========================================================================
+   REBIN TOUCH DISPLAY KIOSK ANIMATIONS
+   Fluid, 60fps hardware-accelerated animations for Raspberry Pi 5
+   Color Palette Preserved: #4CAF50, #1E88E5, #FB8C00, #2E7D32, #EF5350
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Ambient Background Floating Glow Orbs
+   -------------------------------------------------------------------------- */
+.ambient-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.65;
+  will-change: transform;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #E8F5E9 0%, rgba(232, 245, 233, 0) 70%);
+  top: -100px;
+  right: -80px;
+  animation: floatOrb1 14s infinite ease-in-out;
+}
+
+.orb-2 {
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, #E3F2FD 0%, rgba(227, 242, 253, 0) 70%);
+  bottom: -120px;
+  left: -100px;
+  animation: floatOrb2 16s infinite ease-in-out;
+}
+
+.orb-3 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, #FFF8E1 0%, rgba(255, 248, 225, 0) 70%);
+  top: 40%;
+  left: 45%;
+  animation: floatOrb3 18s infinite ease-in-out;
+}
+
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 30px) scale(1.1); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(35px, -35px) scale(1.08); }
+}
+
+@keyframes floatOrb3 {
+  0%, 100% { transform: translate(0, 0) scale(0.9); }
+  50% { transform: translate(-25px, -20px) scale(1.15); }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Logo Halo & Dual Pulsing Waves
+   -------------------------------------------------------------------------- */
+.idle-logo-halo {
+  animation: floatGently 4s infinite ease-in-out;
+}
+
+@keyframes floatGently {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.pulsing-ring {
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  right: -14px;
+  bottom: -14px;
+  border-radius: 50%;
+  border: 3px solid var(--color-primary);
+  opacity: 0.7;
+  animation: pulseRing 2.6s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.pulsing-ring-inner {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  animation: pulseRing 2.6s infinite 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.26);
+    opacity: 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Shimmer Light Sweep on Titles & Buttons
+   -------------------------------------------------------------------------- */
+.shimmer-text {
+  background: linear-gradient(90deg, #212121 0%, #4CAF50 50%, #212121 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmerSweep 4s linear infinite;
+}
+
+@keyframes shimmerSweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Staggered Menu & Card Entrance Animations
+   -------------------------------------------------------------------------- */
+.screen.active .menu-item-card {
+  animation: cardSpringIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.screen.active .menu-item-card:nth-child(1) { animation-delay: 0.05s; }
+.screen.active .menu-item-card:nth-child(2) { animation-delay: 0.10s; }
+.screen.active .menu-item-card:nth-child(3) { animation-delay: 0.15s; }
+.screen.active .menu-item-card:nth-child(4) { animation-delay: 0.20s; }
+
+@keyframes cardSpringIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.88) translateY(24px);
+  }
+  70% {
+    transform: scale(1.03) translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Staggered Entrance for Occupancy Cards */
+.screen.active .occupancy-left-panel {
+  animation: slideInFromLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.screen.active .waste-card {
+  animation: cardSpringIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.screen.active .waste-card:nth-child(1) { animation-delay: 0.06s; }
+.screen.active .waste-card:nth-child(2) { animation-delay: 0.12s; }
+.screen.active .waste-card:nth-child(3) { animation-delay: 0.18s; }
+.screen.active .waste-card:nth-child(4) { animation-delay: 0.24s; }
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Staggered Entrance for Problem Report Buttons */
+.screen.active .problem-option-btn {
+  animation: slideInFromRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.screen.active .problem-option-btn:nth-child(1) { animation-delay: 0.05s; }
+.screen.active .problem-option-btn:nth-child(2) { animation-delay: 0.10s; }
+.screen.active .problem-option-btn:nth-child(3) { animation-delay: 0.15s; }
+.screen.active .problem-option-btn:nth-child(4) { animation-delay: 0.20s; }
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Staggered Promo Feature List */
+.screen.active .promo-feature-list li {
+  animation: featureSlide 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.screen.active .promo-feature-list li:nth-child(1) { animation-delay: 0.08s; }
+.screen.active .promo-feature-list li:nth-child(2) { animation-delay: 0.16s; }
+.screen.active .promo-feature-list li:nth-child(3) { animation-delay: 0.24s; }
+.screen.active .promo-feature-list li:nth-child(4) { animation-delay: 0.32s; }
+
+@keyframes featureSlide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Classification Animations (Scanner, Radar, Result Pop)
+   -------------------------------------------------------------------------- */
+/* Rotating Recycling Spinner */
+.spinning-recycle-icon {
+  width: 120px;
+  height: 120px;
+  animation: spinInfinite 2s linear infinite, glowPulse 2s infinite ease-in-out;
+}
+
+@keyframes spinInfinite {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(76, 175, 80, 0.4)); }
+  50% { filter: drop-shadow(0 0 16px rgba(76, 175, 80, 0.85)); }
+}
+
+/* Radar Rings on Classification */
+.spinner-container {
+  position: relative;
+}
+
+.spinner-container::before {
+  content: '';
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 2px dashed rgba(76, 175, 80, 0.4);
+  animation: spinInfinite 8s linear reverse infinite;
+}
+
+/* Laser Scan Line on Captured Image */
+.result-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.result-frame::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.45) 50%, rgba(255,255,255,0));
+  animation: laserSweep 2.2s infinite ease-in-out 0.5s;
+}
+
+@keyframes laserSweep {
+  0% { top: -40%; }
+  60%, 100% { top: 120%; }
+}
+
+/* Result Material Badge Bounce */
+.screen.active .result-material-box {
+  animation: badgeSpringPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+@keyframes badgeSpringPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  75% {
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   6. Touch Interactive Ripple & Bottle Animations
+   -------------------------------------------------------------------------- */
+/* Bouncing Down Arrow */
+.bouncing-arrow {
+  animation: arrowBounce 1.4s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(14px);
+  }
+}
+
+/* Floating Guide Bottle */
+.guide-bottle-wrapper {
+  animation: floatBottle 3s infinite ease-in-out;
+}
+
+@keyframes floatBottle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+/* Touch Prompt Card Glow Pulse */
+.guide-touch-card {
+  animation: touchCardGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes touchCardGlow {
+  0%, 100% {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    border-color: var(--color-primary-light);
+  }
+  50% {
+    box-shadow: 0 10px 28px rgba(76, 175, 80, 0.22);
+    border-color: rgba(76, 175, 80, 0.5);
+  }
+}
+
+/* Touch Ripple Visual Circle */
+.touch-ripple-effect {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(76, 175, 80, 0.4) 0%, rgba(76, 175, 80, 0) 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  animation: touchRippleAnim 0.45s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes touchRippleAnim {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(5.5);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   7. Modal Entrance Animation
+   -------------------------------------------------------------------------- */
+.modal-overlay:not(.hidden) .modal-card {
+  animation: modalCardPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes modalCardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

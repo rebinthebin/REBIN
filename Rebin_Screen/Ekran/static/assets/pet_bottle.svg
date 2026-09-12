@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240">
+  <defs>
+    <linearGradient id="bottleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#81D4FA" />
+      <stop offset="100%" stop-color="#1E88E5" />
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="100%" stop-color="#2E7D32" />
+    </linearGradient>
+  </defs>
+  <!-- Bottle -->
+  <g transform="translate(50, 10)">
+    <!-- Cap -->
+    <rect x="35" y="0" width="30" height="12" rx="3" fill="#1E88E5" />
+    <rect x="38" y="12" width="24" height="8" fill="#90CAF9" />
+    <!-- Neck -->
+    <path d="M 38 20 L 38 35 Q 20 48 20 65 L 20 150 Q 20 165 35 165 L 65 165 Q 80 165 80 150 L 80 65 Q 80 48 62 35 L 62 20 Z" 
+          fill="url(#bottleGrad)" opacity="0.85" stroke="#1976D2" stroke-width="2" />
+    <!-- Ridges on bottle body -->
+    <line x1="25" y1="85" x2="75" y2="85" stroke="#E1F5FE" stroke-width="2" opacity="0.7" />
+    <line x1="25" y1="110" x2="75" y2="110" stroke="#E1F5FE" stroke-width="2" opacity="0.7" />
+    <line x1="25" y1="135" x2="75" y2="135" stroke="#E1F5FE" stroke-width="2" opacity="0.7" />
+    <!-- Label -->
+    <rect x="22" y="90" width="56" height="36" rx="4" fill="#FFFFFF" opacity="0.9" />
+    <!-- Small recycling icon on bottle label -->
+    <circle cx="50" cy="108" r="10" fill="#E8F5E9" />
+    <path d="M 50 102 L 53 107 L 47 107 Z M 55 111 L 52 113 L 56 109 Z M 45 111 L 48 113 L 44 109 Z" fill="#4CAF50" />
+  </g>
+  
+  <!-- Animated Down Arrow -->
+  <g transform="translate(100, 195)">
+    <path d="M 0 -15 L 0 15 M -12 5 L 0 18 L 12 5" fill="none" stroke="url(#arrowGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280, height=720, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>REBIN — Akıllı Geri Dönüşüm Sistemi</title>
+  
+  <!-- Modern Typography (Inter & Outfit fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+  <div id="app-container" class="landscape-container">
+    
+    <!-- Ambient Animated Background Orbs (Section 5 Colors: #E8F5E9, #E3F2FD, #FFF8E1) -->
+    <div class="ambient-background">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+      <div class="ambient-orb orb-3"></div>
+    </div>
+    
+    <!-- ================================================================= -->
+    <!-- TOP HEADER BAR (All Screens)                                      -->
+    <!-- ================================================================= -->
+    <header id="top-header" class="top-header">
+      <div class="header-left">
+        <button id="btn-back" class="btn-back hidden" aria-label="Geri">
+          <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Geri</span>
+        </button>
+        <div id="header-status-pill" class="header-status-pill status-ready">
+          <span class="status-pulse-dot"></span>
+          <span id="header-status-text">Sistem Hazır</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <h1 class="header-title">REBIN</h1>
+      </div>
+
+      <div class="header-right">
+        <button id="btn-header-exit" class="btn-header-exit" aria-label="Arayüzden Çıkış">
+          <img src="/assets/icons/square-arrow-right-exit.png" alt="Çıkış" class="btn-exit-icon-img" onerror="this.src='/assets/square-arrow-right-exit.png'" />
+          <span>Çıkış</span>
+        </button>
+        <div class="header-logo-wrapper" id="header-logo-btn">
+          <img src="/assets/logo.png" alt="REBIN Logo" class="header-logo" id="header-logo-img" onerror="this.src='/assets/logo.png'" />
+        </div>
+      </div>
+    </header>
+
+    <!-- ================================================================= -->
+    <!-- MAIN VIEWPORT / SCREENS CONTAINER                                 -->
+    <!-- ================================================================= -->
+    <main id="main-viewport" class="main-viewport">
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 1. BEKLEME (IDLE) EKRANLARI (5 Saniyede Bir Otomatik Döngü)  -->
+      <!-- ------------------------------------------------------------- -->
+      
+      <!-- 1.1 İsim Ekranı -->
+      <section id="screen-idle-name" class="screen idle-screen active">
+        <div class="idle-screen-layout">
+          <div class="idle-name-content">
+            <div class="idle-logo-halo">
+              <div class="pulsing-ring"></div>
+              <div class="pulsing-ring-inner"></div>
+              <img src="/assets/logo.png" alt="REBIN" class="idle-large-logo" id="idle-large-logo-img" />
+            </div>
+            <h2 class="idle-system-title">Akıllı Geri Dönüşüm Sistemi</h2>
+          </div>
+          
+          <div class="guide-touch-card">
+            <div class="guide-touch-badge">
+              <img src="/assets/icons/pointer.png" alt="Dokunun" class="guide-pointer-icon-img" onerror="this.src='/assets/pointer.png'" />
+            </div>
+            <span class="guide-touch-text">Menülere ulaşmak için ekrana dokunun</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.2 Mobil Uygulama Tanıtım Ekranı -->
+      <section id="screen-idle-promo" class="screen idle-screen">
+        <div class="idle-screen-layout">
+          <div class="idle-promo-layout">
+            <!-- Sol: QR Kod Kartı -->
+            <div class="promo-qr-card interactive-qr-frame" id="btn-zoom-qr" title="Büyütmek için tıklayınız">
+              <div class="qr-frame">
+                <img src="/assets/QR_Rebin_Mobile_download.jpeg" alt="Rebin Mobile İndir" class="promo-qr-img" onerror="this.src='/assets/qr.jpeg'" />
+              </div>
+              <div class="unified-qr-zoom-hint" id="btn-zoom-qr-tag">
+                <img src="/assets/icons/search.png" alt="Büyüt" class="zoom-search-icon-img" onerror="this.src='/assets/search.png'" />
+                <span>Büyütmek için tıklayınız</span>
+              </div>
+            </div>
+
+            <!-- Sağ: Özellikler Listesi -->
+            <div class="promo-info-card">
+              <h2 class="promo-title">Rebin-Mobile'ı İndirin!</h2>
+              <ul class="promo-feature-list">
+                <li>
+                  <div class="feature-check-badge">
+                    <img src="/assets/icons/check.png" alt="✓" class="feature-check-icon-img" onerror="this.src='/assets/check.png'" />
+                  </div>
+                  <span>Kutularınızı takip edin</span>
+                </li>
+                <li>
+                  <div class="feature-check-badge">
+                    <img src="/assets/icons/check.png" alt="✓" class="feature-check-icon-img" onerror="this.src='/assets/check.png'" />
+                  </div>
+                  <span>Yakınınızdaki kutuları bulun</span>
+                </li>
+                <li>
+                  <div class="feature-check-badge">
+                    <img src="/assets/icons/check.png" alt="✓" class="feature-check-icon-img" onerror="this.src='/assets/check.png'" />
+                  </div>
+                  <span>Atıkları taratın</span>
+                </li>
+                <li>
+                  <div class="feature-check-badge">
+                    <img src="/assets/icons/check.png" alt="✓" class="feature-check-icon-img" onerror="this.src='/assets/check.png'" />
+                  </div>
+                  <span>Geri dönüşüme katkıda bulunun</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="guide-touch-card">
+            <div class="guide-touch-badge">
+              <img src="/assets/icons/pointer.png" alt="Dokunun" class="guide-pointer-icon-img" onerror="this.src='/assets/pointer.png'" />
+            </div>
+            <span class="guide-touch-text">Menülere ulaşmak için ekrana dokunun</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.3 Yönlendirme Ekranı -->
+      <section id="screen-idle-guide" class="screen idle-screen">
+        <div class="idle-screen-layout">
+          <div class="idle-guide-content">
+            <h2 class="guide-header-text">Atık malzemeyi bölmeye yerleştirin</h2>
+            
+            <div class="guide-visual-container">
+              <div class="guide-bottle-wrapper">
+                <img src="/assets/pet_bottle.svg" alt="Pet Şişe" class="guide-bottle-img" id="guide-bottle-img" />
+              </div>
+            </div>
+          </div>
+
+          <div class="guide-touch-card">
+            <div class="guide-touch-badge">
+              <img src="/assets/icons/pointer.png" alt="Dokunun" class="guide-pointer-icon-img" onerror="this.src='/assets/pointer.png'" />
+            </div>
+            <span class="guide-touch-text">Menülere ulaşmak için ekrana dokunun</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 2. SINIFLANDIRMA AKIŞI EKRANI                                 -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="screen-classification" class="screen">
+        
+        <!-- 2.A Sınıflandırma Sırasında (Loading) -->
+        <div id="classifying-loading-state" class="classifying-substate">
+          <div class="spinner-container">
+            <div class="circular-spinner"></div>
+          </div>
+          <h2 class="classifying-text">Atık Algılanıyor...</h2>
+          <p class="classifying-subtext">Yapay Zeka Analiz Ediyor...</p>
+        </div>
+
+        <!-- 2.B Sınıflandırma Başarılı (Sonuç Ekranı) -->
+        <div id="classifying-result-state" class="classifying-substate hidden">
+          <div class="classification-result-grid">
+            <!-- Sol: Çerçeveli Yakalanan Görüntü -->
+            <div class="result-image-card">
+              <div id="result-img-frame" class="result-frame border-plastic">
+                <img id="result-captured-img" src="/data/waste_images/sample_plastic_1.png" alt="Yakalanan Atık" class="captured-waste-img" />
+              </div>
+            </div>
+
+            <!-- Sağ: Dairesel Doğruluk Oranı + Malzeme Türü Kutusu -->
+            <div class="result-stats-card">
+              <div class="confidence-circle-wrapper">
+                <svg class="confidence-svg" viewBox="0 0 160 160">
+                  <circle class="circle-bg" cx="80" cy="80" r="68"></circle>
+                  <circle id="confidence-circle-progress" class="circle-progress stroke-plastic" cx="80" cy="80" r="68"></circle>
+                </svg>
+                <div class="confidence-text-inside">
+                  <span id="confidence-percent-value" class="confidence-number">%96</span>
+                  <span class="confidence-label">Doğruluk</span>
+                </div>
+              </div>
+
+              <!-- Malzeme Türü Dikdörtgen Kutusu (Beyaz font) -->
+              <div id="result-material-badge" class="result-material-box bg-plastic">
+                <span id="result-material-text">PLASTİK</span>
+              </div>
+
+              <!-- Cooldown & Hazneye Aktarım Bilgi Paneli -->
+              <div id="result-cooldown-panel" class="result-cooldown-panel">
+                <div class="cooldown-header-row">
+                  <div class="cooldown-title-group">
+                    <span id="cooldown-spinner-icon" class="cooldown-spinner-icon">⚙️</span>
+                    <span id="cooldown-status-title" class="cooldown-title">Atık Hazneye Aktarılıyor...</span>
+                  </div>
+                  <span id="cooldown-timer-number" class="cooldown-seconds">5.0s</span>
+                </div>
+                <div class="cooldown-track">
+                  <div id="cooldown-progress-bar" class="cooldown-fill"></div>
+                </div>
+                <div id="cooldown-subtext" class="cooldown-subtext">Lütfen atığın hazneye düşmesini bekleyiniz</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.C Malzeme Algılanamadı (Hata/Retry) -->
+        <div id="classifying-error-state" class="classifying-substate hidden">
+          <div class="error-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#EF5350" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h2 class="error-title">Malzeme Algılanamadı</h2>
+          <p class="error-message">Lütfen tekrar deneyin</p>
+          <button id="btn-error-retry" class="btn-primary-action">Ana Menüye Dön</button>
+        </div>
+
+      </section>
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 3. ANA MENÜ (2x2 Kare Izgara)                                 -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="screen-menu" class="screen">
+        <div class="menu-grid-2x2">
+          <!-- Sol Üst: Doluluk Oranları -->
+          <div class="menu-item-card" id="menu-btn-occupancy">
+            <div class="menu-icon-circle color-green">
+              <img src="/assets/icons/percent.svg" alt="Doluluk" class="menu-svg-icon" />
+            </div>
+            <span class="menu-item-label">Doluluk oranlarını görüntüle</span>
+          </div>
+
+          <!-- Sağ Üst: Atıkları Görüntüle -->
+          <div class="menu-item-card" id="menu-btn-waste-gallery">
+            <div class="menu-icon-circle color-blue">
+              <img src="/assets/icons/camera.svg" alt="Atıklar" class="menu-svg-icon" />
+            </div>
+            <span class="menu-item-label">Atıkları görüntüle</span>
+          </div>
+
+          <!-- Sol Alt: QR Kod Görüntüle -->
+          <div class="menu-item-card" id="menu-btn-qr-view">
+            <div class="menu-icon-circle color-orange">
+              <img src="/assets/icons/qr.svg" alt="QR Kod" class="menu-svg-icon" />
+            </div>
+            <span class="menu-item-label">QR Kod görüntüle</span>
+          </div>
+
+          <!-- Sağ Alt: Sorun İlet -->
+          <div class="menu-item-card" id="menu-btn-problem-report">
+            <div class="menu-icon-circle color-red">
+              <img src="/assets/icons/alert.svg" alt="Sorun İlet" class="menu-svg-icon" />
+            </div>
+            <span class="menu-item-label">Sorun ilet</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 3.1 DOLULUK ORANLARI SAYFASI                                  -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="screen-occupancy" class="screen">
+        <div class="occupancy-layout">
+          
+          <!-- Sol: Genel Doluluk Oranı Dairesel Gösterge -->
+          <div class="occupancy-left-panel">
+            <div class="general-gauge-card">
+              <h3 class="panel-section-title">Genel Doluluk Oranı</h3>
+              
+              <div class="gauge-circle-container">
+                <svg class="gauge-svg" viewBox="0 0 200 200">
+                  <circle class="gauge-track" cx="100" cy="100" r="82"></circle>
+                  <circle id="general-gauge-fill" class="gauge-fill" cx="100" cy="100" r="82"></circle>
+                </svg>
+                <div class="gauge-center-text">
+                  <span id="general-occupancy-percent" class="gauge-percent-number">%16</span>
+                  <span class="gauge-sublabel">Toplam Doluluk</span>
+                </div>
+              </div>
+
+              <div class="bin-status-pill">
+                <span class="status-dot"></span>
+                <span id="bin-status-text">Kutu Aktif (pbin_0001)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sağ: 2x2 Malzeme Bazlı Doluluk Kutuları -->
+          <div class="occupancy-right-panel">
+            <div class="material-waste-grid-2x2">
+              
+              <!-- Plastik (Mavi) -->
+              <div class="waste-card card-plastic">
+                <div class="waste-card-circular">
+                  <svg class="waste-mini-svg" viewBox="0 0 80 80">
+                    <circle class="waste-mini-track track-plastic" cx="40" cy="40" r="32"></circle>
+                    <circle id="mini-progress-plastic" class="waste-mini-fill fill-plastic" cx="40" cy="40" r="32"></circle>
+                  </svg>
+                  <div class="waste-mini-icon">
+                    <img src="/assets/icons/plastic.svg" alt="Plastik" />
+                  </div>
+                </div>
+                <h4 class="waste-card-title">Plastik</h4>
+                <p id="waste-percent-plastic" class="waste-card-percent">%2 Dolu</p>
+              </div>
+
+              <!-- Kağıt (Turuncu/Sarı) -->
+              <div class="waste-card card-paper">
+                <div class="waste-card-circular">
+                  <svg class="waste-mini-svg" viewBox="0 0 80 80">
+                    <circle class="waste-mini-track track-paper" cx="40" cy="40" r="32"></circle>
+                    <circle id="mini-progress-paper" class="waste-mini-fill fill-paper" cx="40" cy="40" r="32"></circle>
+                  </svg>
+                  <div class="waste-mini-icon">
+                    <img src="/assets/icons/paper.svg" alt="Kağıt" />
+                  </div>
+                </div>
+                <h4 class="waste-card-title">Kağıt</h4>
+                <p id="waste-percent-paper" class="waste-card-percent">%6 Dolu</p>
+              </div>
+
+              <!-- Cam (Koyu Yeşil) -->
+              <div class="waste-card card-glass">
+                <div class="waste-card-circular">
+                  <svg class="waste-mini-svg" viewBox="0 0 80 80">
+                    <circle class="waste-mini-track track-glass" cx="40" cy="40" r="32"></circle>
+                    <circle id="mini-progress-glass" class="waste-mini-fill fill-glass" cx="40" cy="40" r="32"></circle>
+                  </svg>
+                  <div class="waste-mini-icon">
+                    <img src="/assets/icons/glass.svg" alt="Cam" />
+                  </div>
+                </div>
+                <h4 class="waste-card-title">Cam</h4>
+                <p id="waste-percent-glass" class="waste-card-percent">%4 Dolu</p>
+              </div>
+
+              <!-- Metal (Kırmızı) -->
+              <div class="waste-card card-metal">
+                <div class="waste-card-circular">
+                  <svg class="waste-mini-svg" viewBox="0 0 80 80">
+                    <circle class="waste-mini-track track-metal" cx="40" cy="40" r="32"></circle>
+                    <circle id="mini-progress-metal" class="waste-mini-fill fill-metal" cx="40" cy="40" r="32"></circle>
+                  </svg>
+                  <div class="waste-mini-icon">
+                    <img src="/assets/icons/metal.svg" alt="Metal" />
+                  </div>
+                </div>
+                <h4 class="waste-card-title">Metal</h4>
+                <p id="waste-percent-metal" class="waste-card-percent">%4 Dolu</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 3.2 ATIKLARI GÖRÜNTÜLE SAYFASI (Lokal Görüntüler 3xY Grid)    -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="screen-waste-gallery" class="screen">
+        <div class="gallery-container">
+          <div class="gallery-header">
+            <h3 class="gallery-title">Lokal Atık Görüntüleri</h3>
+            <span class="gallery-subtitle">Raspberry Pi üzerinde saklanan kayıtlar</span>
+          </div>
+
+          <div id="waste-gallery-grid" class="waste-gallery-grid-3col">
+            <!-- Dynamically populated from JS -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 3.3 QR KOD GÖRÜNTÜLE SAYFASI                                  -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="screen-qr-view" class="screen">
+        <div class="qr-view-layout">
+          <div class="qr-display-card">
+            <div class="qr-image-wrapper">
+              <img src="/assets/pbin_0001.png" alt="Kutu QR Kodu" class="qr-local-image" onerror="this.src='/assets/qr.jpeg'" />
+            </div>
+            <h3 class="qr-instruction-title">Kutuyu mobil uygulamaya eklemek için QR kodu taratın</h3>
+            <div class="qr-bin-meta">
+              <span class="bin-meta-badge">Kutu ID: <strong>pbin_0001</strong></span>
+              <span class="bin-meta-badge">Tip: <strong>Özel Kutu</strong></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- 3.4 SORUN İLET SAYFASI                                        -->
+      <!-- ------------------------------------------------------------- -->
+      <section id="screen-problem-report" class="screen">
+        <div class="problem-report-layout">
+          <h2 class="problem-header-title">Karşılaştığınız sorunu seçiniz</h2>
+          <p class="problem-header-desc">Seçtiğiniz bildirim teknik ekibimize iletilecektir.</p>
+
+          <div class="problem-options-list">
+            <button class="problem-option-btn" data-error-type="error_1" data-issue="Rebin malzemeyi algılamıyor!">
+              <div class="problem-badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#EF5350" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="problem-alert-svg">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <span class="problem-btn-text">Rebin malzemeyi algılamıyor!</span>
+              <span class="problem-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-svg"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+            </button>
+
+            <button class="problem-option-btn" data-error-type="error_2" data-issue="Rebin malzemeyi sınıflandırmıyor!">
+              <div class="problem-badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#EF5350" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="problem-alert-svg">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <span class="problem-btn-text">Rebin malzemeyi sınıflandırmıyor!</span>
+              <span class="problem-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-svg"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+            </button>
+
+            <button class="problem-option-btn" data-error-type="error_3" data-issue="Rebin malzemeyi ayrıştırmıyor">
+              <div class="problem-badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#EF5350" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="problem-alert-svg">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <span class="problem-btn-text">Rebin malzemeyi ayrıştırmıyor</span>
+              <span class="problem-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-svg"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+            </button>
+
+            <button class="problem-option-btn" data-error-type="error_4" data-issue="Diğer nedenler">
+              <div class="problem-badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#EF5350" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="problem-alert-svg">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <span class="problem-btn-text">Diğer nedenler</span>
+              <span class="problem-btn-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-svg"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================================================================= -->
+    <!-- ================================================================= -->
+    <!-- MODAL DIALOG: BÜYÜK QR KOD GÖRÜNTÜLEME                           -->
+    <!-- ================================================================= -->
+    <div id="qr-zoom-modal" class="modal-overlay hidden">
+      <div class="modal-card qr-zoom-modal-card">
+        <div class="qr-zoom-header">
+          <h2 class="qr-zoom-title">Rebin-Mobile Uygulamasını İndirin</h2>
+          <p class="qr-zoom-desc">Kutunuzu mobil uygulamaya eklemek veya indirmek için QR kodu telefonunuzla taratın.</p>
+        </div>
+
+        <div class="qr-zoom-image-wrapper">
+          <img src="/assets/QR_Rebin_Mobile_download.jpeg" alt="Büyük QR Kod" class="qr-zoom-large-img" onerror="this.src='/assets/qr.jpeg'" />
+        </div>
+
+        <div class="qr-zoom-actions">
+          <button id="btn-qr-zoom-close" class="btn-primary-return">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="return-home-icon">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Geri</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DIALOG: ATIK DETAYI                                         -->
+    <!-- ================================================================= -->
+    <div id="waste-detail-modal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-image-wrapper">
+          <img id="modal-waste-img" src="" alt="Atık Detay" class="modal-waste-img" />
+        </div>
+        
+        <div class="modal-content-body">
+          <div class="modal-info-row">
+            <h3 id="modal-waste-type" class="modal-waste-title">Plastik</h3>
+            <span id="modal-confidence-badge" class="modal-conf-badge">%96.4</span>
+          </div>
+
+          <p id="modal-timestamp" class="modal-timestamp-text">30 Ağustos 2026, 19:42</p>
+
+          <button id="btn-modal-close" class="btn-modal-close">Kapat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- MODAL DIALOG: ÇIKIŞ ONAY                                          -->
+    <!-- ================================================================= -->
+    <div id="exit-confirm-modal" class="modal-overlay hidden">
+      <div class="modal-card exit-modal-card">
+        <div class="exit-modal-header">
+          <div class="exit-icon-halo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#EF5350" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="exit-modal-title">Arayüzden Çıkış</h3>
+          <p class="exit-modal-desc">Kiosk modunu kapatıp masaüstüne dönmek istediğinize emin misiniz?</p>
+        </div>
+        
+        <div class="exit-modal-actions">
+          <button id="btn-exit-cancel" class="btn-exit-cancel">İptal</button>
+          <button id="btn-exit-confirm" class="btn-exit-confirm">Çıkış Yap</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- TOAST NOTIFICATION                                                -->
+    <!-- ================================================================= -->
+    <div id="toast-notification" class="toast-notification hidden">
+      <div class="toast-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <div id="toast-message" class="toast-text">İşlem başarıyla gerçekleştirildi.</div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/app.js"></script>
+  <script src="/js/idle.js"></script>
+  <script src="/js/classification.js"></script>
+  <script src="/js/occupancy.js"></script>
+  <script src="/js/waste_gallery.js"></script>
+  <script src="/js/problem_report.js"></script>
+</body>
+</html>

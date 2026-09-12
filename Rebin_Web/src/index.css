@@ -1,0 +1,137 @@
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+
+/* ============================================
+   REBIN-WEB DESIGN SYSTEM - Tailwind v4 Theme
+   ============================================ */
+@theme {
+  /* Ana Renkler */
+  --color-primary: #38A169;
+  --color-primary-dark: #4CAF50;
+  --color-primary-light: #68D391;
+
+  /* Atık Türü Renkleri */
+  --color-waste-plastic: #1565C0;
+  --color-waste-plastic-bg: #EBF3FA;
+  --color-waste-paper: #FBC02D;
+  --color-waste-paper-bg: #FFFDE7;
+  --color-waste-glass: #388E3C;
+  --color-waste-glass-bg: #E8F5E9;
+  --color-waste-metal: #E53935;
+  --color-waste-metal-bg: #FFEBEE;
+
+  /* Arka Plan */
+  --color-bg: #F7FAFC;
+  --color-bg-alt: #F5F5F5;
+
+  /* Metin */
+  --color-dark: #1A202C;
+
+  /* Border Radius */
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+}
+
+/* ========================
+   GLOBAL RESET & BASE
+   ======================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F7FAFC;
+  color: #1A202C;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================
+   CUSTOM SCROLLBAR
+   ======================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F7FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A0AEC0;
+}
+
+/* ========================
+   PAGE ANIMATION
+   ======================== */
+.page-enter {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================
+   LEAFLET CUSTOM STYLES
+   ======================== */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+}
+
+/* ========================
+   CARD SHADOW UTILITY
+   ======================== */
+.shadow-card {
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+}
+
+/* ========================
+   COLOR UTILITIES (v4 CSS vars)
+   ======================== */
+.text-primary        { color: var(--color-primary); }
+.text-primary-dark   { color: var(--color-primary-dark); }
+.text-dark           { color: var(--color-dark); }
+
+.bg-primary          { background-color: var(--color-primary); }
+.bg-primary-dark     { background-color: var(--color-primary-dark); }
+.bg-bg               { background-color: var(--color-bg); }
+
+.border-primary      { border-color: var(--color-primary); }
+
+.hover\:bg-primary-dark:hover { background-color: var(--color-primary-dark); }
+.hover\:text-primary:hover    { color: var(--color-primary); }
+.hover\:text-primary-dark:hover { color: var(--color-primary-dark); }
+.hover\:text-dark:hover { color: var(--color-dark); }
+
+/* Primary/Opacity variants */
+.bg-primary\/5   { background-color: rgb(56 161 105 / 0.05); }
+.bg-primary\/10  { background-color: rgb(56 161 105 / 0.10); }
+.bg-primary\/20  { background-color: rgb(56 161 105 / 0.20); }
+.border-primary\/10  { border-color: rgb(56 161 105 / 0.10); }
+.border-primary\/20  { border-color: rgb(56 161 105 / 0.20); }
+.border-primary\/30  { border-color: rgb(56 161 105 / 0.30); }
+.ring-primary\/30    { --tw-ring-color: rgb(56 161 105 / 0.30); }
+
+.hover\:bg-primary\/10:hover { background-color: rgb(56 161 105 / 0.10); }
+.hover\:bg-primary\/20:hover { background-color: rgb(56 161 105 / 0.20); }
+.focus\:ring-primary\/30:focus { --tw-ring-color: rgb(56 161 105 / 0.30); }
+.focus\:border-primary:focus   { border-color: var(--color-primary); }
+
+/* Truck marker */
+@keyframes pulse-marker {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.2); }
+}
+.truck-marker-icon {
+  animation: pulse-marker 1.5s ease-in-out infinite;
+}

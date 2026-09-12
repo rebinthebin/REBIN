@@ -1,0 +1,359 @@
+[
+  {
+    "id": "rec_1788891681329",
+    "image_filename": "waste_1788891681324.jpg",
+    "waste_type": "Plastik",
+    "confidence": 0.96,
+    "created_at": "2026-09-08T21:21:21.329852"
+  },
+  {
+    "id": "rec_1788803499773",
+    "image_filename": "waste_1788803499767.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:51:39.773091"
+  },
+  {
+    "id": "rec_1788803480167",
+    "image_filename": "waste_1788803480163.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:51:20.167626"
+  },
+  {
+    "id": "rec_1788803449149",
+    "image_filename": "waste_1788803449144.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:50:49.149728"
+  },
+  {
+    "id": "rec_1788802867439",
+    "image_filename": "waste_1788802867404.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:41:07.439398"
+  },
+  {
+    "id": "rec_1788802050637",
+    "image_filename": "waste_1788802050632.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:27:30.637772"
+  },
+  {
+    "id": "rec_1788802005028",
+    "image_filename": "waste_1788802005023.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:26:45.028561"
+  },
+  {
+    "id": "rec_1788801996719",
+    "image_filename": "waste_1788801996716.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T20:26:36.719893"
+  },
+  {
+    "id": "rec_1788792447330",
+    "image_filename": "waste_1788792447327.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T17:47:27.330422"
+  },
+  {
+    "id": "rec_1788791610449",
+    "image_filename": "waste_1788791610445.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T17:33:30.449672"
+  },
+  {
+    "id": "rec_1788791571730",
+    "image_filename": "waste_1788791571727.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T17:32:51.730900"
+  },
+  {
+    "id": "rec_1788785839546",
+    "image_filename": "waste_1788785839542.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:57:19.546409"
+  },
+  {
+    "id": "rec_1788785831530",
+    "image_filename": "waste_1788785831526.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:57:11.530980"
+  },
+  {
+    "id": "rec_1788785788840",
+    "image_filename": "waste_1788785788836.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:56:28.840033"
+  },
+  {
+    "id": "rec_1788785773428",
+    "image_filename": "waste_1788785773425.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:56:13.428670"
+  },
+  {
+    "id": "rec_1788785579494",
+    "image_filename": "waste_1788785579490.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:52:59.494183"
+  },
+  {
+    "id": "rec_1788785569725",
+    "image_filename": "waste_1788785569719.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:52:49.725244"
+  },
+  {
+    "id": "rec_1788785561876",
+    "image_filename": "waste_1788785561861.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:52:41.876561"
+  },
+  {
+    "id": "rec_1788785332317",
+    "image_filename": "waste_1788785332313.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:48:52.317168"
+  },
+  {
+    "id": "rec_1788785312857",
+    "image_filename": "waste_1788785312853.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:48:32.858007"
+  },
+  {
+    "id": "rec_1788785300549",
+    "image_filename": "waste_1788785300545.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:48:20.549399"
+  },
+  {
+    "id": "rec_1788785264322",
+    "image_filename": "waste_1788785264318.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:47:44.322766"
+  },
+  {
+    "id": "rec_1788785246675",
+    "image_filename": "waste_1788785246671.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:47:26.675752"
+  },
+  {
+    "id": "rec_1788785236083",
+    "image_filename": "waste_1788785236079.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:47:16.083419"
+  },
+  {
+    "id": "rec_1788783299667",
+    "image_filename": "waste_1788783299656.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-07T15:14:59.667322"
+  },
+  {
+    "id": "rec_1788655998010",
+    "image_filename": "waste_1788655998005.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:53:18.010570"
+  },
+  {
+    "id": "rec_1788655987249",
+    "image_filename": "waste_1788655987244.jpg",
+    "waste_type": "Cam",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:53:07.249907"
+  },
+  {
+    "id": "rec_1788655886309",
+    "image_filename": "waste_1788655886305.jpg",
+    "waste_type": "Cam",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:51:26.309498"
+  },
+  {
+    "id": "rec_1788655733788",
+    "image_filename": "waste_1788655733783.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:48:53.788486"
+  },
+  {
+    "id": "rec_1788655714857",
+    "image_filename": "waste_1788655714853.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:48:34.857972"
+  },
+  {
+    "id": "rec_1788655700458",
+    "image_filename": "waste_1788655700453.jpg",
+    "waste_type": "Plastik",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:48:20.458867"
+  },
+  {
+    "id": "rec_1788655651339",
+    "image_filename": "waste_1788655651336.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:47:31.339972"
+  },
+  {
+    "id": "rec_1788655639669",
+    "image_filename": "waste_1788655639665.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:47:19.669796"
+  },
+  {
+    "id": "rec_1788655464594",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:44:24.594787"
+  },
+  {
+    "id": "rec_1788655260780",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.95,
+    "created_at": "2026-09-06T03:41:00.780451"
+  },
+  {
+    "id": "rec_1788655231305",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.95,
+    "created_at": "2026-09-06T03:40:31.305532"
+  },
+  {
+    "id": "rec_1788655225489",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.95,
+    "created_at": "2026-09-06T03:40:25.489312"
+  },
+  {
+    "id": "rec_1788654663720",
+    "image_filename": "waste_1788654663705.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:31:03.720790"
+  },
+  {
+    "id": "rec_1788654280819",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.95,
+    "created_at": "2026-09-06T03:24:40.819162"
+  },
+  {
+    "id": "rec_1788653816350",
+    "image_filename": "waste_1788653815543.jpg",
+    "waste_type": "Metal",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:16:56.350740"
+  },
+  {
+    "id": "rec_1788653677530",
+    "image_filename": "sample_glass_1.png",
+    "waste_type": "Cam",
+    "confidence": 0.99,
+    "created_at": "2026-09-06T03:14:37.530119"
+  },
+  {
+    "id": "rec_1788653668972",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.98,
+    "created_at": "2026-09-06T03:14:28.972695"
+  },
+  {
+    "id": "rec_1788653402282",
+    "image_filename": "waste_1788653401476.jpg",
+    "waste_type": "Kağıt",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:10:02.282222"
+  },
+  {
+    "id": "rec_1788653257081",
+    "image_filename": "sample_glass_1.png",
+    "waste_type": "Cam",
+    "confidence": 0.97,
+    "created_at": "2026-09-06T03:07:37.081542"
+  },
+  {
+    "id": "rec_1788653239777",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.98,
+    "created_at": "2026-09-06T03:07:19.777806"
+  },
+  {
+    "id": "rec_1788653236891",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.96,
+    "created_at": "2026-09-06T03:07:16.891548"
+  },
+  {
+    "id": "rec_1788109667168",
+    "image_filename": "sample_glass_1.png",
+    "waste_type": "Cam",
+    "confidence": 0.94,
+    "created_at": "2026-08-30T20:07:47.168991"
+  },
+  {
+    "id": "rec_001",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Plastik",
+    "confidence": 0.964,
+    "created_at": "2026-08-30T19:42:15+03:00"
+  },
+  {
+    "id": "rec_002",
+    "image_filename": "sample_glass_1.png",
+    "waste_type": "Cam",
+    "confidence": 0.928,
+    "created_at": "2026-08-30T19:15:30+03:00"
+  },
+  {
+    "id": "rec_003",
+    "image_filename": "sample_plastic_1.png",
+    "waste_type": "Metal",
+    "confidence": 0.885,
+    "created_at": "2026-08-30T18:50:12+03:00"
+  },
+  {
+    "id": "rec_004",
+    "image_filename": "sample_glass_1.png",
+    "waste_type": "Kağıt",
+    "confidence": 0.942,
+    "created_at": "2026-08-30T18:10:04+03:00"
+  }
+]

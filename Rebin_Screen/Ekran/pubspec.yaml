@@ -1,0 +1,26 @@
+name: rebin_screen
+description: REBIN Screen interface and mobile components
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: any
+  google_fonts: any
+  percent_indicator: any
+  go_router: any
+  latlong2: any
+  supabase_flutter: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+
+flutter:
+  uses-material-design: true

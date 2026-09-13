@@ -289,12 +289,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       height: cardHeight,
                       child: _buildWasteCard(
                         context: context,
-                        title: 'Kağıt',
-                        percent: bin.wasteLevels['paper'] ?? 0.0,
-                        color: WasteTheme.paperColor,
-                        softBgColor: WasteTheme.paperSoftBg,
-                        textColor: WasteTheme.paperColor,
-                        icon: WasteTheme.paperIcon,
+                        title: 'Plastik',
+                        percent: bin.wasteLevels['plastic'] ?? 0.0,
+                        color: WasteTheme.plasticColor,
+                        softBgColor: WasteTheme.plasticSoftBg,
+                        textColor: WasteTheme.plasticColor,
+                        icon: WasteTheme.plasticIcon,
                       ),
                     ),
                     SizedBox(
@@ -302,12 +302,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       height: cardHeight,
                       child: _buildWasteCard(
                         context: context,
-                        title: 'Plastik',
-                        percent: bin.wasteLevels['plastic'] ?? 0.0,
-                        color: WasteTheme.plasticColor,
-                        softBgColor: WasteTheme.plasticSoftBg,
-                        textColor: WasteTheme.plasticColor,
-                        icon: WasteTheme.plasticIcon,
+                        title: 'Kağıt',
+                        percent: bin.wasteLevels['paper'] ?? 0.0,
+                        color: WasteTheme.paperColor,
+                        softBgColor: WasteTheme.paperSoftBg,
+                        textColor: WasteTheme.paperColor,
+                        icon: WasteTheme.paperIcon,
                       ),
                     ),
                     SizedBox(
@@ -444,13 +444,59 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Günlük Aktivite",
-                        style: GoogleFonts.outfit(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isCompleted
+                                  ? Colors.green
+                                  : Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: isCompleted
+                                    ? Colors.green
+                                    : Colors.grey.shade300,
+                                width: 1,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (isCompleted) ...[
+                                  const Icon(
+                                    Icons.check,
+                                    size: 12,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 4),
+                                ],
+                                Text(
+                                  isCompleted ? "(1 GB) Tamamlandı" : "(1 GB)",
+                                  style: GoogleFonts.outfit(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: isCompleted
+                                        ? Colors.white
+                                        : Colors.grey.shade700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "Günlük Aktivite",
+                            style: GoogleFonts.outfit(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
                       ),
                       if (isCompleted)
                         const Icon(

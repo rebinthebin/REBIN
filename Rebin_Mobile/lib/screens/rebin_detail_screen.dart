@@ -270,10 +270,10 @@ class RebinDetailScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               
-              // Atık Standart Renkleri: Kağıt (Sarı), Plastik (Mavi), Cam (Yeşil), Metal (Kırmızı)
-              _buildWasteBar('Kağıt', bin.paper, WasteTheme.paperColor, WasteTheme.paperSoftBg, WasteTheme.paperColor, WasteTheme.paperIcon),
-              const SizedBox(height: 16),
+              // Atık Standart Renkleri: Plastik (Mavi), Kağıt (Sarı), Cam (Yeşil), Metal (Kırmızı)
               _buildWasteBar('Plastik', bin.plastic, WasteTheme.plasticColor, WasteTheme.plasticSoftBg, WasteTheme.plasticColor, WasteTheme.plasticIcon),
+              const SizedBox(height: 16),
+              _buildWasteBar('Kağıt', bin.paper, WasteTheme.paperColor, WasteTheme.paperSoftBg, WasteTheme.paperColor, WasteTheme.paperIcon),
               const SizedBox(height: 16),
               _buildWasteBar('Cam', bin.glass, WasteTheme.glassColor, WasteTheme.glassSoftBg, WasteTheme.glassColor, WasteTheme.glassIcon),
               const SizedBox(height: 16),

@@ -182,8 +182,8 @@ class BinListItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildSmallWasteIndicator('Kağıt', bin.paper, WasteTheme.paperColor),
                   _buildSmallWasteIndicator('Plastik', bin.plastic, WasteTheme.plasticColor),
+                  _buildSmallWasteIndicator('Kağıt', bin.paper, WasteTheme.paperColor),
                   _buildSmallWasteIndicator('Cam', bin.glass, WasteTheme.glassColor),
                   _buildSmallWasteIndicator('Metal', bin.metal, WasteTheme.metalColor),
                 ],

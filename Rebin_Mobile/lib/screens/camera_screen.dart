@@ -31,7 +31,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> with TickerProvider
   TFLiteService? _tfliteService;
   bool _isProcessing = false;
   List<String> _availableModels = [];
-  String _currentModel = 'assets/models/best_full_integer_quant.tflite';
+  String _currentModel = 'assets/models/best_rebin_float16.tflite';
   bool _isTFLiteActive = true; // Şu an TFLite mi, PyTorch mu kullanılıyor?
 
   // Aktif mod değişkenleri
@@ -92,13 +92,13 @@ class _CameraScreenState extends ConsumerState<CameraScreen> with TickerProvider
           .map((key) => key.split('/').last)
           .toList();
 
-      if (_availableModels.contains('best_full_integer_quant.tflite')) {
-        _availableModels.remove('best_full_integer_quant.tflite');
-        _availableModels.insert(0, 'best_full_integer_quant.tflite');
+      if (_availableModels.contains('best_rebin_float16.tflite')) {
+        _availableModels.remove('best_rebin_float16.tflite');
+        _availableModels.insert(0, 'best_rebin_float16.tflite');
       }
     } catch (e) {
       debugPrint("AssetManifest yüklenemedi: $e");
-      _availableModels = ['best_int8.tflite', 'best_float16.tflite', 'best.torchscript', 'best.pt'];
+      _availableModels = ['best_rebin_float16.tflite', 'best_int8.tflite', 'best_float16.tflite', 'best.torchscript', 'best.pt'];
     }
 
     _pytorchService = PyTorchService();
@@ -513,8 +513,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> with TickerProvider
   Widget _buildModelOption(String modelName, BuildContext dialogContext) {
     final String fullPath = 'assets/models/$modelName';
     final bool isSelected = _currentModel == fullPath;
-    final bool isSpecial = modelName == 'best_full_integer_quant.tflite';
-    final String displayName = isSpecial ? 'REBIN_yolo11n' : modelName;
+    final bool isSpecial = modelName == 'best_rebin_float16.tflite';
+    final String displayName = isSpecial ? 'REBIN (Float16)' : modelName;
     final Color color = isSpecial ? Colors.green : (isSelected ? Colors.green : Colors.grey);
 
     return ListTile(

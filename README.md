@@ -39,7 +39,7 @@
 
 ### 1.1 Projenin Tanımı
 
-R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork), geleneksel çöp kutusunu yapay zeka destekli, ağ bağlantılı ve kentsel yönetimle entegre bir akıllı geri dönüşüm sistemine dönüştürür. Sistem üç temel katmandan oluşur:
+R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork), geleneksel geri dönüşüm kutularını yapay zeka destekli, ağ bağlantılı ve kentsel yönetimle entegre bir akıllı geri dönüşüm sistemine dönüştürür. Sistem dört temel katmandan oluşur:
 
 | Katman | Bileşen | Teknoloji |
 |--------|---------|-----------|
@@ -79,8 +79,8 @@ R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork
 │  SQL Triggers:    check_capacity_increase_limit             │
 │                   update_bin_status_on_error                │
 └──────────┬──────────────────────────────────────┬───────────┘
-           │ Realtime + REST                       │ Realtime + REST
-           ▼                                       ▼
+           │ Realtime + REST                      │ Realtime + REST
+           ▼                                      ▼
 ┌─────────────────────┐              ┌─────────────────────────┐
 │   REBIN_WEB         │              │   REBIN_MOBILE          │
 │   React + Vite      │              │   Flutter + Dart        │

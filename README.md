@@ -505,12 +505,12 @@ Content-Type: application/json
 
 ---
 
-### A. Rebin_Screen — AI Dedektör Servisi (Raspberry Pi 5)
+### A. 🧠 Rebin_Screen — AI Dedektör Servisi (Raspberry Pi 5)
 
 #### Gereksinimler
 
-- Raspberry Pi 5 (8 GB RAM önerilir)
-- **Hailo 8 AI HAT+** (⚠️ PCIe bağlantılı — zorunlu)
+- Raspberry Pi 5 (4 GB RAM önerilir)
+- **Hailo 8 AI HAT+** ⚠️ (PCIe bağlantılı — zorunlu)
 - NIR Kamera Modülü (Picamera2 uyumlu)
 - Raspberry Pi OS Bookworm (64-bit)
 - Python 3.11+
@@ -573,7 +573,7 @@ sudo systemctl status rebin_detector.service
 
 ---
 
-### B. Rebin_Screen — Watchdog & Supabase Sync Daemon
+### B. 📊 Rebin_Screen — Watchdog & Supabase Sync Daemon
 
 ```bash
 cd REBIN/Rebin_Screen/rebin_tracker
@@ -629,7 +629,7 @@ WantedBy=multi-user.target
 
 ---
 
-### C. Rebin_Screen — Kiosk Arayüzü
+### C. ♻️ Rebin_Screen — Kiosk Arayüzü
 
 ```bash
 cd REBIN/Rebin_Screen/Ekran
@@ -651,7 +651,7 @@ chmod +x start_kiosk.sh
 
 ---
 
-### D. Rebin_Web — Web Yönetim Paneli
+### D. 🌍 Rebin_Web — Web Yönetim Paneli
 
 #### Gereksinimler
 
@@ -675,7 +675,7 @@ npm run preview
 
 ---
 
-### E. Rebin_Mobile — Flutter Mobil Uygulaması
+### E. 📱 Rebin_Mobile — Flutter Mobil Uygulaması
 
 #### Gereksinimler
 
@@ -702,7 +702,7 @@ dart run build_runner build --delete-conflicting-outputs
 
 ---
 
-### F. Supabase Kurulumu (Yeni Ortam İçin)
+### F. 📊 Supabase Kurulumu (Yeni Ortam İçin)
 
 ```sql
 -- 1. Tabloları oluştur (yukarıdaki şemayı kullanarak)

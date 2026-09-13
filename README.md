@@ -4,6 +4,8 @@
 ### **Akıllı Entegre Atık Yönetim Sistemi**
 #### *Recycling Enabled Bin with Intelligence Network*
 
+#### 🚀 TEKNOFEST | Sıfır Atık ve Döngüsel Ekonomi Yarışması ♻️
+
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)

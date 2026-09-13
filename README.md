@@ -243,11 +243,9 @@ Rebin_Mobile, bireylerin kendi evlerinden yakındaki Rebin kutularını takip et
 
 ## 3. Veritabanı Tasarımı ve Veri Modeli
 
-## 3. Veritabanı Tasarımı ve Veri Modeli (Database Schema)
-
 Sistem, **Supabase PostgreSQL** üzerinde ilişkisel veri bütünlüğü, row-level security (RLS) ve özel veritabanı tetikleyicileri ile kurgulanmıştır.
 
-## 3.1 ER Diyagramı
+### 3.1 ER Diyagramı
 
 ```mermaid
 erDiagram

@@ -446,6 +446,8 @@ WITH CHECK (bucket_id = 'rebin-images');
 
 ```
 
+```
+
 ### 3.4 Veri Akışı Özeti
 
 ```
@@ -463,6 +465,8 @@ Hailo AI HAT+ sınıflandırır
                   ┌──────┴──────┐
                   ▼             ▼
               Rebin_Web   Rebin_Mobile
+```
+
 ```
 
 ---

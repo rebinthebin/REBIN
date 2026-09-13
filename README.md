@@ -1,5 +1,3 @@
-<img width="476" height="106" alt="image" src="https://github.com/user-attachments/assets/bd7f1214-10f2-4d3f-a92b-f74f8bf75ba3" /><div align="center">
-
 # 🌍 R.E.B.İ.N. ♻️
 ### **Akıllı Entegre Atık Yönetim Sistemi**
 #### *Recycling Enabled Bin with Intelligence Network*

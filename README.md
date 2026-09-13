@@ -1,10 +1,10 @@
 <div align="center">
 
-# ♻️ R.E.B.İ.N.
+# 🌍 R.E.B.İ.N. ♻️
 ### **Akıllı Entegre Atık Yönetim Sistemi**
 #### *Recycling Enabled Bin with Intelligence Network*
 
-#### TEKNOFEST | Sıfır Atık ve Döngüsel Ekonomi Yarışması
+#### 🚀 TEKNOFEST | Sıfır Atık ve Döngüsel Ekonomi Yarışması ♻️
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
@@ -100,7 +100,7 @@ R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork
 
 ---
 
-## 🟢 A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
+## ♻️ A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
 
 > **Konum:** `Rebin_Screen/`
 > **Platform:** Raspberry Pi 5 (Debian Bookworm), Python 3.11+, Flutter (Kiosk)

@@ -441,14 +441,9 @@ USING (bucket_id = 'rebin-images');
 CREATE POLICY "Allow Public Insert"
 ON storage.objects FOR INSERT
 WITH CHECK (bucket_id = 'rebin-images');
-
 ```
 
-```
-
-```
-
-### 3.4 Veri Akışı Özeti
+### 3.5 Veri Akışı Özeti
 
 ```
 Hailo AI HAT+ sınıflandırır

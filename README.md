@@ -245,29 +245,103 @@ Rebin_Mobile, bireylerin kendi evlerinden yakındaki Rebin kutularını takip et
 
 > **Platform:** Supabase (PostgreSQL 15+)
 
-### 3.1 Tablo Şeması
+```markdown
+## 3. Veritabanı Tasarımı ve Veri Modeli (Database Schema)
+
+Sistem, **Supabase PostgreSQL** üzerinde ilişkisel veri bütünlüğü, row-level security (RLS) ve özel veritabanı tetikleyicileri ile kurgulanmıştır.
+
+### 3.1 ER Diyagramı
+
+```mermaid
+erDiagram
+    rebins ||--o{ bin_images : "has many"
+    rebins ||--o| bin_errors : "has one"
+    depolar ||--o{ rebins : "serves"
+    tesisler ||--o{ rebins : "receives"
+
+    rebins {
+        text bin_id PK "Örn: pbin_0001"
+        text name
+        text type "'private' | 'public'"
+        boolean is_active
+        text status "'active' | 'out_of_order'"
+        text semt
+        float8 latitude
+        float8 longitude
+        timestamptz last_updated
+        timestamptz last_emptying
+        float4 occupancy_plastic "0.0 - 1.0"
+        float4 occupancy_paper "0.0 - 1.0"
+        float4 occupancy_glass "0.0 - 1.0"
+        float4 occupancy_metal "0.0 - 1.0"
+        text qr_image_url
+        text qr_token
+    }
+
+    bin_images {
+        uuid id PK
+        text bin_id FK
+        text image_url
+        text waste_type "'plastic' | 'paper' | 'glass' | 'metal'"
+        float4 confidence
+        timestamptz created_at
+    }
+
+    bin_errors {
+        text bin_id PK,FK
+        integer error_1 "Malzemeyi algılamıyor"
+        integer error_2 "Malzemeyi sınıflandırmıyor"
+        integer error_3 "Malzemeyi ayrıştırmıyor"
+        integer error_4 "Diğer nedenler"
+        timestamptz last_reported_at
+    }
+
+    depolar {
+        serial id PK
+        text depo_adi
+        text semt
+        text city "'Ankara' | 'İstanbul'"
+        float8 latitude
+        float8 longitude
+    }
+
+    tesisler {
+        serial id PK
+        text tesis_adi
+        text semt
+        text city
+        float8 latitude
+        float8 longitude
+    }
+
+```
+
+---
+
+### 3.2 Tablo Şeması
 
 #### `rebins` — Ana Kutu Tablosu
 
 ```sql
 CREATE TABLE rebins (
-  bin_id              TEXT PRIMARY KEY,           -- Örn: "pbin_0001"
-  name                TEXT NOT NULL,
-  type                TEXT,                        -- "private" | "public"
-  is_active           BOOLEAN DEFAULT TRUE,
-  status              TEXT DEFAULT 'active',       -- "active" | "out_of_order"
-  semt                TEXT,
-  latitude            FLOAT8,
-  longitude           FLOAT8,
-  last_updated        TIMESTAMPTZ DEFAULT NOW(),
-  last_emptying       TIMESTAMPTZ,
-  occupancy_plastic   FLOAT4 DEFAULT 0.0,          -- 0.0 – 1.0
-  occupancy_paper     FLOAT4 DEFAULT 0.0,
-  occupancy_glass     FLOAT4 DEFAULT 0.0,
-  occupancy_metal     FLOAT4 DEFAULT 0.0,
-  qr_image_url        TEXT,
-  qr_token            TEXT
+  bin_id            TEXT PRIMARY KEY,           -- Örn: "pbin_0001"
+  name              TEXT NOT NULL,
+  type              TEXT,                       -- "private" | "public"
+  is_active         BOOLEAN DEFAULT TRUE,
+  status            TEXT DEFAULT 'active',      -- "active" | "out_of_order"
+  semt              TEXT,
+  latitude          FLOAT8,
+  longitude         FLOAT8,
+  last_updated      TIMESTAMPTZ DEFAULT NOW(),
+  last_emptying     TIMESTAMPTZ,
+  occupancy_plastic FLOAT4 DEFAULT 0.0,         -- 0.0 – 1.0
+  occupancy_paper   FLOAT4 DEFAULT 0.0,
+  occupancy_glass   FLOAT4 DEFAULT 0.0,
+  occupancy_metal   FLOAT4 DEFAULT 0.0,
+  qr_image_url      TEXT,
+  qr_token          TEXT
 );
+
 ```
 
 #### `bin_images` — AI Sınıflandırma Fotoğraf Kaydı
@@ -281,6 +355,7 @@ CREATE TABLE bin_images (
   confidence  FLOAT4,                              -- 0.0 – 1.0
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
+
 ```
 
 #### `bin_errors` — Donanım Hata Kayıtları
@@ -294,35 +369,40 @@ CREATE TABLE bin_errors (
   error_4          INTEGER DEFAULT 0,              -- Diğer nedenler
   last_reported_at TIMESTAMPTZ DEFAULT NOW()
 );
+
 ```
 
 #### `depolar` — Atık Toplama Depo Koordinatları
 
 ```sql
 CREATE TABLE depolar (
-  id         SERIAL PRIMARY KEY,
-  depo_adi   TEXT NOT NULL,
-  semt       TEXT,
-  city       TEXT,                                 -- "Ankara" | "İstanbul"
-  latitude   FLOAT8,
-  longitude  FLOAT8
+  id        SERIAL PRIMARY KEY,
+  depo_adi  TEXT NOT NULL,
+  semt      TEXT,
+  city      TEXT,                                 -- "Ankara" | "İstanbul"
+  latitude  FLOAT8,
+  longitude FLOAT8
 );
+
 ```
 
 #### `tesisler` — Geri Dönüşüm Tesisi Koordinatları
 
 ```sql
 CREATE TABLE tesisler (
-  id         SERIAL PRIMARY KEY,
-  tesis_adi  TEXT NOT NULL,
-  semt       TEXT,
-  city       TEXT,
-  latitude   FLOAT8,
-  longitude  FLOAT8
+  id        SERIAL PRIMARY KEY,
+  tesis_adi TEXT NOT NULL,
+  semt      TEXT,
+  city      TEXT,
+  latitude  FLOAT8,
+  longitude FLOAT8
 );
+
 ```
 
-### 3.2 SQL Trigger'lar ve Güvenlik Kuralları
+---
+
+### 3.3 SQL Trigger'lar ve Güvenlik Kuralları
 
 #### `check_capacity_increase_limit` — Ani Doluluk Artışı Koruyucusu
 
@@ -330,27 +410,12 @@ CREATE TABLE tesisler (
 
 ```sql
 CREATE OR REPLACE FUNCTION check_capacity_increase_limit()
-RETURNS TRIGGER AS $$
-BEGIN
-  IF (NEW.occupancy_plastic - OLD.occupancy_plastic) > 0.10 THEN
-    NEW.occupancy_plastic := OLD.occupancy_plastic + 0.10;
-  END IF;
-  IF (NEW.occupancy_paper - OLD.occupancy_paper) > 0.10 THEN
-    NEW.occupancy_paper := OLD.occupancy_paper + 0.10;
-  END IF;
-  IF (NEW.occupancy_glass - OLD.occupancy_glass) > 0.10 THEN
-    NEW.occupancy_glass := OLD.occupancy_glass + 0.10;
-  END IF;
-  IF (NEW.occupancy_metal - OLD.occupancy_metal) > 0.10 THEN
-    NEW.occupancy_metal := OLD.occupancy_metal + 0.10;
-  END IF;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+RETURNS TRIGGER AS $$ BEGIN   IF (NEW.occupancy_plastic - OLD.occupancy_plastic) > 0.10 THEN     NEW.occupancy_plastic := OLD.occupancy_plastic + 0.10;   END IF;   IF (NEW.occupancy_paper - OLD.occupancy_paper) > 0.10 THEN     NEW.occupancy_paper := OLD.occupancy_paper + 0.10;   END IF;   IF (NEW.occupancy_glass - OLD.occupancy_glass) > 0.10 THEN     NEW.occupancy_glass := OLD.occupancy_glass + 0.10;   END IF;   IF (NEW.occupancy_metal - OLD.occupancy_metal) > 0.10 THEN     NEW.occupancy_metal := OLD.occupancy_metal + 0.10;   END IF;   RETURN NEW; END; $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER check_capacity_increase_limit
 BEFORE UPDATE ON rebins
 FOR EACH ROW EXECUTE FUNCTION check_capacity_increase_limit();
+
 ```
 
 #### `update_bin_status_on_error` — Arıza Durumu Otomatik Tetikleyici
@@ -359,19 +424,17 @@ FOR EACH ROW EXECUTE FUNCTION check_capacity_increase_limit();
 
 ```sql
 CREATE OR REPLACE FUNCTION update_bin_status_on_error()
-RETURNS TRIGGER AS $$
-BEGIN
-  UPDATE rebins SET status = 'out_of_order' WHERE bin_id = NEW.bin_id;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+RETURNS TRIGGER AS $$ BEGIN   UPDATE rebins SET status = 'out_of_order' WHERE bin_id = NEW.bin_id;   RETURN NEW; END; $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_bin_status_on_error
 AFTER INSERT OR UPDATE ON bin_errors
 FOR EACH ROW EXECUTE FUNCTION update_bin_status_on_error();
+
 ```
 
-### 3.3 Storage — RLS Politikaları (`REBIN-IMAGES` Bucket)
+---
+
+### 3.4 Storage — RLS Politikaları (`rebin-images` Bucket)
 
 ```sql
 -- Herkese okuma izni (Public URL ile erişim)
@@ -383,70 +446,10 @@ USING (bucket_id = 'rebin-images');
 CREATE POLICY "Allow Public Insert"
 ON storage.objects FOR INSERT
 WITH CHECK (bucket_id = 'rebin-images');
+
 ```
 
-### 3.3.3.3
-
-erDiagram
-    rebins ||--o{ bin_images : "1-to-N (bin_id)"
-    rebins ||--o| bin_errors : "1-to-1 (bin_id)"
-
-    rebins {
-        TEXT bin_id PK "Örn: pbin_0001"
-        TEXT name
-        TEXT type "private | public"
-        BOOLEAN is_active
-        TEXT status "active | out_of_order"
-        TEXT semt
-        FLOAT8 latitude
-        FLOAT8 longitude
-        TIMESTAMPTZ last_updated
-        TIMESTAMPTZ last_emptying
-        FLOAT4 occupancy_plastic
-        FLOAT4 occupancy_paper
-        FLOAT4 occupancy_glass
-        FLOAT4 occupancy_metal
-        TEXT qr_image_url
-        TEXT qr_token
-    }
-
-    bin_images {
-        UUID id PK
-        TEXT bin_id FK
-        TEXT image_url
-        TEXT waste_type "plastic | paper | glass | metal"
-        FLOAT4 confidence
-        TIMESTAMPTZ created_at
-    }
-
-    bin_errors {
-        TEXT bin_id PK_FK
-        INTEGER error_1 "Algılama hatası"
-        INTEGER error_2 "Sınıflandırma hatası"
-        INTEGER error_3 "Ayrıştırma hatası"
-        INTEGER error_4 "Diğer hatalar"
-        TIMESTAMPTZ last_reported_at
-    }
-
-    depolar {
-        SERIAL id PK
-        TEXT depo_adi
-        TEXT semt
-        TEXT city "Ankara | İstanbul"
-        FLOAT8 latitude
-        FLOAT8 longitude
-    }
-
-    tesisler {
-        SERIAL id PK
-        TEXT tesis_adi
-        TEXT semt
-        TEXT city
-        FLOAT8 latitude
-        FLOAT8 longitude
-    }
-
-
+```
 
 ### 3.4 Veri Akışı Özeti
 

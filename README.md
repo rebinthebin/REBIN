@@ -385,6 +385,69 @@ ON storage.objects FOR INSERT
 WITH CHECK (bucket_id = 'rebin-images');
 ```
 
+### 3.3.3.3
+
+erDiagram
+    rebins ||--o{ bin_images : "1-to-N (bin_id)"
+    rebins ||--o| bin_errors : "1-to-1 (bin_id)"
+
+    rebins {
+        TEXT bin_id PK "Örn: pbin_0001"
+        TEXT name
+        TEXT type "private | public"
+        BOOLEAN is_active
+        TEXT status "active | out_of_order"
+        TEXT semt
+        FLOAT8 latitude
+        FLOAT8 longitude
+        TIMESTAMPTZ last_updated
+        TIMESTAMPTZ last_emptying
+        FLOAT4 occupancy_plastic
+        FLOAT4 occupancy_paper
+        FLOAT4 occupancy_glass
+        FLOAT4 occupancy_metal
+        TEXT qr_image_url
+        TEXT qr_token
+    }
+
+    bin_images {
+        UUID id PK
+        TEXT bin_id FK
+        TEXT image_url
+        TEXT waste_type "plastic | paper | glass | metal"
+        FLOAT4 confidence
+        TIMESTAMPTZ created_at
+    }
+
+    bin_errors {
+        TEXT bin_id PK_FK
+        INTEGER error_1 "Algılama hatası"
+        INTEGER error_2 "Sınıflandırma hatası"
+        INTEGER error_3 "Ayrıştırma hatası"
+        INTEGER error_4 "Diğer hatalar"
+        TIMESTAMPTZ last_reported_at
+    }
+
+    depolar {
+        SERIAL id PK
+        TEXT depo_adi
+        TEXT semt
+        TEXT city "Ankara | İstanbul"
+        FLOAT8 latitude
+        FLOAT8 longitude
+    }
+
+    tesisler {
+        SERIAL id PK
+        TEXT tesis_adi
+        TEXT semt
+        TEXT city
+        FLOAT8 latitude
+        FLOAT8 longitude
+    }
+
+
+
 ### 3.4 Veri Akışı Özeti
 
 ```

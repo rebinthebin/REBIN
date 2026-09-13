@@ -54,7 +54,7 @@ R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork
 ┌─────────────────────────────────────────────────────────────┐
 │               FİZİKSEL ÜNİTE (Raspberry Pi 5)               │
 │                                                             │
-│  [NIR Kamera] ──► [Hailo 8 AI HAT+]  ──► [UART Motor]      │
+│  [NIR Kamera] ──► [Hailo 8 AI HAT+]  ──► [UART Motor]       │
 │    Picamera2       best_rebin.hef         Kapak Kontrolü    │
 │                        │                                    │
 │               [supabase_updater.py]                         │
@@ -510,7 +510,7 @@ Content-Type: application/json
 #### Gereksinimler
 
 - Raspberry Pi 5 (8 GB RAM önerilir)
-- **Hailo 8 AI HAT+** (PCIe bağlantılı — zorunlu)
+- **Hailo 8 AI HAT+** (⚠️ PCIe bağlantılı — zorunlu)
 - NIR Kamera Modülü (Picamera2 uyumlu)
 - Raspberry Pi OS Bookworm (64-bit)
 - Python 3.11+

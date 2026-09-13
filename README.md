@@ -739,7 +739,7 @@ YAZILIM "OLDUĞU GİBİ" SAĞLANMAKTADIR.
 
 | Kaynak | Bağlantı |
 |--------|----------|
-| 🎥 Demo Videosu | [Proje Demo Videosu] |
+| 🎥 Demo Videosu | [Proje Demo Videosu] (https://www.youtube.com/watch?v=hlvKAUG3taQ) |
 | 📦 Android APK | [Rebin Mobile APK](https://drive.google.com/drive/folders/1Y1RdkCDDLU_3oStzXXCN_Xjaif4XnmFc) |
 
 ---

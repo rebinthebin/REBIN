@@ -1,583 +1,824 @@
-# Rebin - Entegre Akıllı Atık Yönetim Sistemi
+<div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=white)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database%20%26%20Realtime-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Raspberry Pi](https://img.shields.io/badge/Hardware-Raspberry%20Pi%205-C51A4A?logo=raspberrypi&logoColor=white)](https://www.raspberrypi.com/)
-[![Zero Waste](https://img.shields.io/badge/Standart-T.C.%20Sıfır%20Atık-00A651)](#12-sıfır-atık-standartları-ve-renk-kodları)
+# ♻️ R.E.B.İ.N.
+### **Akıllı Entegre Atık Yönetim Sistemi**
+#### *Recycling Enabled Bin with Intelligence Network*
+
+#### 🚀 TEKNOFEST | Sıfır Atık ve Döngüsel Ekonomi Yarışması ♻️
+
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
+[![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi_5-AI_HAT+-A22846?style=for-the-badge&logo=raspberrypi&logoColor=white)](https://www.raspberrypi.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+
+> **T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı "Sıfır Atık" standartlarına tam uyumlu,**
+> **Raspberry Pi 5 + AI HAT+ tabanlı fiziksel akıllı atık ayrıştırma ünitesi ile web ve mobil yönetim panellerinden oluşan bütünleşik ekosistem.**
+
+</div>
 
 ---
 
-## İçindekiler
+## 📋 İçindekiler
+
 1. [Proje Özeti ve Mimari Bakış](#1-proje-özeti-ve-mimari-bakış)
-   - [Projenin Tanımı](#11-projenin-tanımı)
-   - [Sıfır Atık Standartları ve Renk Kodları](#12-sıfır-atık-standartları-ve-renk-kodları)
-   - [Sistem Mimarisi Şeması](#13-sistem-mimarisi-şeması)
-2. [Sistem Bileşenleri ve Ekran Fonksiyonları (Kullanıcı Kılavuzu)](#2-sistem-bileşenleri-ve-ekran-fonksiyonları-kullanıcı-kılavuzu)
-   - [A. Fiziksel Ünite & Donanım Servisi (Raspberry Pi 5 / Python)](#a-fiziksel-ünite--donanım-servisi-raspberry-pi-5--python)
-   - [B. Web Yönetim Paneli (YonetimPage & Harita & Kutular)](#b-web-yönetim-paneli-dashboard--yonetimpage)
-   - [C. Mobil Saha & Yönetici Arayüzü](#c-mobil-saha--yönetici-arayüzü)
-3. [Veritabanı Tasarımı ve Veri Modeli (Database Schema)](#3-veritabanı-tasarımı-ve-veri-modeli-database-schema)
-   - [Varlık-İlişki ve Tablo Yapısı](#31-tablo-yapıları-ve-alan-tanımları)
-   - [İş Mantığı ve Güvenlik Kuralları (Triggers & Functions)](#32-aktif-sql-tetikleyicileri-triggers)
-   - [Storage ve RLS Güvenlik Politikaları](#33-depolama-storage-ve-rls-politikaları)
-4. [Kamu Sistemleri ve REST/OGC API Entegrasyon Potansiyeli](#4-kamu-sistemleri-ve-restogc-api-entegrasyon-potansiyeli)
-   - [Açık Standartlar ve Veri Formatları](#41-açık-standartlar-ve-veri-biçimleri)
-   - [Belediye CBS ve Sıfır Atık Bilgi Sistemi (SABS) Entegrasyonu](#42-belediye-cbsgis-ve-sabs-entegrasyonu)
-5. [Kurulum ve Çalıştırma Rehberi (Installation Guide)](#5-kurulum-ve-çalıştırma-rehberi-installation-guide)
-   - [A. Donanım Servisi Kurulumu (Raspberry Pi)](#a-donanım-servisi-kurulumu-raspberry-pi-5)
-   - [B. Web Yönetim Paneli Kurulumu](#b-web-yönetim-paneli-kurulumu)
-6. [Kütüphaneler ve Lisanslar (Dependencies & Licensing)](#6-kütüphaneler-ve-lisanslar-dependencies--licensing)
-7. [Demo Videosu ve Teknik Doküman Linkleri](#7-demo-videosu-ve-teknik-doküman-linkleri)
+2. [Sistem Bileşenleri](#2-sistem-bileşenleri)
+   - [Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı](#a-rebin_screen--fiziksel-ünite--kiosk-yazılımı)
+   - [Rebin_Web — Yönetim Web Paneli](#b-rebin_web--yönetim-web-paneli)
+   - [Rebin_Mobile — Kullanıcı Mobil Uygulaması](#c-rebin_mobile--kullanıcı-mobil-uygulaması)
+3. [Veritabanı Tasarımı ve Veri Modeli](#3-veritabanı-tasarımı-ve-veri-modeli)
+4. [Kamu Sistemleri ve API Entegrasyon Potansiyeli](#4-kamu-sistemleri-ve-api-entegrasyon-potansiyeli)
+5. [Kurulum ve Çalıştırma Rehberi](#5-kurulum-ve-çalıştırma-rehberi)
+6. [Kütüphaneler ve Lisanslar](#6-kütüphaneler-ve-lisanslar)
+7. [Demo ve Teknik Doküman Linkleri](#7-demo-ve-teknik-doküman-linkleri)
 
 ---
 
 ## 1. Proje Özeti ve Mimari Bakış
 
 ### 1.1 Projenin Tanımı
-**Rebin**, kentsel ve kurumsal alanlarda geri dönüşüm verimliliğini maksimize etmek amacıyla geliştirilmiş uçtan uca **Entegre Akıllı Atık Yönetim Sistemidir**. Sistem; **Raspberry Pi 5** tabanlı fiziksel akıllı atık ayrıştırma ünitesi, derin öğrenme tabanlı kamera görüntü işleme servisi, **Supabase PostgreSQL** bulut omurgası, **OSRM / Held-Karp / 2-Opt** algoritmalarıyla donatılmış dinamik rota optimizasyonlu web kontrol merkezi ve saha ekipleri için geliştirilmiş mobil arayüzlerden oluşur.
 
-Rebin; atığı kaynağında türüne göre (Plastik, Kağıt, Cam, Metal) otonom olarak sınıflandırır, mekanik kapak mekanizmasıyla doğru hazneye yönlendirir, doluluk verilerini anlık olarak buluta işler ve lojistik araç filosunun karbon ayak izini en aza indirecek dinamik toplama rotaları üretir.
+R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork), geleneksel geri dönüşüm kutularını yapay zeka destekli, ağ bağlantılı ve kentsel yönetimle entegre bir akıllı geri dönüşüm sistemine dönüştürür. Sistem dört temel katmandan oluşur:
 
----
+| Katman | Bileşen | Teknoloji |
+|--------|---------|-----------|
+| **Fiziksel Donanım** | Rebin_Screen | Raspberry Pi 5 + AI HAT+ + NIR Kamera |
+| **Yönetim Paneli** | Rebin_Web | React + Vite + Leaflet + Supabase |
+| **Mobil Uygulama** | Rebin_Mobile | Flutter + TFLite/PyTorch + Supabase |
+| **Veri Katmanı** | Supabase | PostgreSQL + Storage + Realtime |
 
-### 1.2 Sıfır Atık Standartları ve Renk Kodları
-Rebin, **T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı Sıfır Atık Yönetmeliği**'nde belirtilen standart atık piktogramları ve renk hiyerarşisiyle tam uyumlu çalışır. Proje arayüzlerinde ve fiziksel ünite yönlendirmelerinde kullanılan renk kodları:
+### 1.2 Sistem Mimarisi
 
-| Atık Kategorisi | Resmi Renk Kodu | İkincil Zemin Tonu | Kullanım Alanı |
-| :--- | :--- | :--- | :--- |
-| **Plastik Atıklar** | `#1477D4` (Mavi) | `#EBF3FA` (Açık Mavi) | Plastik dairesel grafik, ikon ve hazne kartı |
-| **Kağıt Atıklar** | `#FEB200` (Sarı / Turuncu) | `#FFFDE7` (Açık Sarı) | Kağıt dairesel grafik, ikon ve hazne kartı |
-| **Cam Atıklar** | `#41A047` (Canlı Yeşil) | `#E8F5E9` (Açık Yeşil) | Cam dairesel grafik, buton ve hazne kartı |
-| **Metal Atıklar** | `#EF524E` (Kırmızı / Pembe) | `#FFEBEE` (Açık Pembe) | Metal dairesel grafik, ikon ve hazne kartı |
-
----
-
-### 1.3 Sistem Mimarisi Şeması
-
-```mermaid
-flowchart TB
-    subgraph Hardware["1. Fiziksel Ünite (Raspberry Pi 5)"]
-        Cam["Kamera Modülü (HQ Camera)"]
-        Sensors["Sensörler (Doluluk / Ağırlık / ToF)"]
-        Actuators["Servo & Step Motorlar (Ayrıştırma Kapağı)"]
-        PiCore["Pi 5 Edge Controller"]
-        Cam --> PiCore
-        Sensors --> PiCore
-        PiCore --> Actuators
-    end
-
-    subgraph EdgeService["2. Python Kamera & Donanım Servisi"]
-        CV["OpenCV & YOLOv8/v11 Sınıflandırma"]
-        Watchdog["Watchdog Klasör İzleme"]
-        Heartbeat["Donanım Sağlık & Arıza Takibi (Heartbeat)"]
-        PiCore --> CV
-        CV --> Watchdog
-        PiCore --> Heartbeat
-    end
-
-    subgraph Cloud["3. Supabase Bulut Altyapısı"]
-        Storage[("Storage Bucket: REBIN-IMAGES")]
-        Postgres[("PostgreSQL Veritabanı")]
-        Realtime["Realtime Engine (Canlı Yayın & Abonelik)"]
-        Triggers["SQL Triggers (Kapasite Limiti & Arıza Tespiti)"]
-        
-        Watchdog -->|Görsel Upload| Storage
-        Watchdog -->|Metadata & Sonuç| Postgres
-        Heartbeat -->|Hata Kaydı| Postgres
-        Postgres --- Triggers
-        Postgres --- Realtime
-    end
-
-    subgraph ClientLayers["4. Kullanıcı & Operasyon Arayüzleri"]
-        WebAdmin["Web Yönetim Paneli (React 19 + Vite + Leaflet)"]
-        RouteOpt["OSRM / Held-Karp / 2-Opt Rota Motoru"]
-        MobileApp["Mobil Saha Ekibi Arayüzü (Sürücü Navigasyonu)"]
-        MunicipalCBS["Belediye CBS / SABS REST API Entegrasyonu"]
-
-        Realtime -->|WebSocket Akışı| WebAdmin
-        Realtime -->|WebSocket Akışı| MobileApp
-        Postgres -->|REST / PostgREST| RouteOpt
-        Postgres -->|REST / GeoJSON| MunicipalCBS
-    end
 ```
-
-```text
-+---------------------------------------------------------------------------------------+
-|                                REBIN SISTEM MIMARISI                                  |
-+---------------------------------------------------------------------------------------+
-|  [Fiziksel Kutu: RPi 5]  -->  [YOLO & OpenCV]  -->  [Watchdog & Supabase-Py]         |
-|             |                                                |                        |
-|    Sensör & Step Motor                               Görsel & Doluluk Verisi          |
-|             |                                                v                        |
-|             +-------------------------------------> [Supabase Bulut]                  |
-|                                                     - PostgreSQL (rebins, bin_errors) |
-|                                                     - Realtime WebSocket              |
-|                                                     - Storage (REBIN-IMAGES)          |
-|                                                              |                        |
-|       +------------------------------------------------------+                        |
-|       |                                                      |                        |
-|       v                                                      v                        |
-|  [Web Dashboard (React 19)]                           [Mobil Saha Arayüzü]            |
-|  - Canlı 3 Aşamalı Akış                               - Dinamik Rota Takibi           |
-|  - Depolar / Tesisler Haritası                        - QR Kod Doğrulama              |
-|  - Sağ Alt Filo Takip Konsolu                         - Saha Arıza Bildirimi          |
-|  - Held-Karp Rota Optimizasyonu                       - Güvenli %10 Filtresi          |
-+---------------------------------------------------------------------------------------+
+┌─────────────────────────────────────────────────────────────┐
+│               FİZİKSEL ÜNİTE (Raspberry Pi 5)               │
+│                                                             │
+│  [NIR Kamera] ──► [Hailo 8 AI HAT+]  ──► [UART Motor]       │
+│    Picamera2       best_rebin.hef         Kapak Kontrolü    │
+│                        │                                    │
+│               [supabase_updater.py]                         │
+│               occupancy PATCH (+0.02)                       │
+│                        │                                    │
+│    [Flutter Kiosk UI] ◄─── [Python HTTP Server]             │
+│    1280×720 Dokunmatik     SSE Olay Yayını                  │
+│                                                             │
+│    [rebin-tracker Watchdog Daemon]                          │
+│    Dosya İzleme → Supabase Storage Upload                   │
+└─────────────────────────┬───────────────────────────────────┘
+                          │ HTTPS / WSS
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  SUPABASE (Backend as a Service)            │
+│                                                             │
+│  PostgreSQL Tables:  rebins · bin_images · bin_errors       │
+│                      depolar · tesisler                     │
+│                                                             │
+│  Storage Bucket:  REBIN-IMAGES                              │
+│  Realtime:        Postgres Changes Subscription             │
+│  SQL Triggers:    check_capacity_increase_limit             │
+│                   update_bin_status_on_error                │
+└──────────┬──────────────────────────────────────┬───────────┘
+           │ Realtime + REST                      │ Realtime + REST
+           ▼                                      ▼
+┌─────────────────────┐              ┌─────────────────────────┐
+│   REBIN_WEB         │              │   REBIN_MOBILE          │
+│   React + Vite      │              │   Flutter + Dart        │
+│                     │              │                         │
+│  • Kutular Listesi  │              │  • Ana Sayfa            │
+│  • İnteraktif Harita│              │  • Kamera Tarama        │
+│  • Yönetim + Rota   │              │  • Harita               │
+│  • Kutu Detayı      │              │  • Görevler             │
+│  OSRM Rota API      │              │  • İstatistikler        │
+└─────────────────────┘              └─────────────────────────┘
 ```
 
 ---
 
-## 2. Sistem Bileşenleri ve Ekran Fonksiyonları (Kullanıcı Kılavuzu)
-
-### A. Fiziksel Ünite & Donanım Servisi (Raspberry Pi 5 / Python)
-Fiziksel ünite, atığın atıldığı andan itibaren ayrıştırılıp güvenli veriye dönüştürülmesini sağlayan otonom donanım katmanıdır:
-
-1. **OpenCV & YOLO Tabanlı Anlık Atık Sınıflandırma:**
-   - Kutu giriş haznesine yerleştirilen optik sensör tetiklendiğinde yüksek çözünürlüklü kamera ile atık görüntüsü kaydedilir.
-   - Eğitilmiş nesne tespit modeli (YOLO) görüntüyü analiz ederek atığı 4 sınıftan birine (`plastic`, `paper`, `glass`, `metal`) sınıflandırır ve güven skoru (`confidence: 0.0 - 1.0`) üretir.
-2. **GPIO Motor & Mekanik Kapak Kontrolü:**
-   - Model çıktısına göre Raspberry Pi GPIO pinleri üzerinden servo veya step motorlar tetiklenir.
-   - Döner mekanik kanal veya flap sistemi atığı doğru hazneye yönlendirir.
-3. **Watchdog Yerel Klasör İzleme & Supabase Storage Senkronizasyonu:**
-   - `watchdog` kütüphanesi yerel depolama alanını milisaniyelik gecikmeyle dinler.
-   - Yeni yakalanan atık fotoğrafı asenkron olarak Supabase Storage (`REBIN-IMAGES`) kovasına yüklenir; dönen public URL ve sınıflandırma metadataları `bin_images` tablosuna INSERT edilir.
-4. **Donanım Sağlık Kontrolü (Heartbeat) & Arıza Kaydı:**
-   - Belirli aralıklarla sensör yanıtları, motor durumları ve bağlantı kalitesi kontrol edilir (Daemon Heartbeat).
-   - Mekanik sıkışma, sensör arızası veya optik kirlilik saptandığında otomatik olarak `bin_errors` tablosundaki ilgili sayaca (`error_1` - `error_4`) kayıt düşülür.
+## 2. Sistem Bileşenleri
 
 ---
 
-### B. Web Yönetim Paneli (Dashboard & YonetimPage)
-Yöneticiler ve belediye operasyon ekipleri için hazırlanan web kontrol merkezi aşağıdaki kritik fonksiyonları barındırır:
+## A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
 
-1. **Canlı Durum Akışı (Realtime State Stream):**
-   - **Bekleme (Waiting):** Kutu boşta ve yeni atık bekliyor durumundayken şık bir bekleme göstergesi sunar.
-   - **Sınıflandırma Bekleniyor (Processing - CSS Spin):** Atık algılandığında ve yapay zeka çıkarımı sürerken akıcı CSS animasyonlu spin göstergesi ile sistemin çalıştığı kullanıcıya bildirilir.
-   - **Sonuç Ekranı (Result):** Çıkarım tamamlandığında 10 saniyelik dairesel geri sayım başlar. Bu ekranda çekilen güncel atık fotoğrafı, tespit edilen kategori rozeti ve doğruluk oranı (`% Güven Skoru`) canlı olarak sergilenir.
-2. **İnteraktif Harita & Tesis Entegrasyonu (`HaritaPage` & `YonetimPage`):**
-   - **Depolar:** Supabase `depolar` tablosundan canlı çekilen lojistik kalkış noktaları mavi işaretçilerle (`#2563EB`) gösterilir.
-   - **Tesisler:** `tesisler` tablosundan çekilen ana geri dönüşüm merkezleri yeşil işaretçilerle (`#7C3AED` / `#9333EA` / `#388E3C`) haritada konumlandırılır.
-   - **Kutular:** Kutuların anlık doluluk durumlarına göre dinamik piktogramlar ve arıza bayrakları harita üzerinde render edilir.
-3. **Bölgesel ve Semt Bazlı Filtreleme:**
-   - Şehir bazında hızlı odaklanma (**İstanbul** / **Ankara** merkez koordinatları ve zoom düzeyleri).
-   - Veritabanındaki `semt` kolonundan dinamik üretilen semt filtreleme menüsü sayesinde hedeflenen mahalle ve bölgeler anında süzülebilir.
-4. **Filo Takip & Kontrol Paneli (Sağ Alt Widget):**
-   - Yönetim sayfasının sağ alt köşesine sabitlenmiş, katlanabilir (minimize/maximize) bağımsız filo izleme konsolu.
-   - OSRM matrisi ve Held-Karp / 2-Opt algoritmalarıyla optimize edilen araçların anlık harita üzerindeki hareketleri, kalan mesafe, tahmini varış süresi ve taşıma durumu bu konsoldan yönetilir.
-5. **Arıza & Kapasite Yönetimi:**
-   - Arıza bildirim sayacı pozitif olan kutular için sarı/kehribar temalı belirgin **"ARIZALI!"** uyarı kartı açılır.
-   - Yönetici tek tıkla **"İlgili Birimi Görevlendir"** butonuna basarak arıza durumunu sıfırlayabilir ve saha ekiplerine bildirim yönlendirebilir.
+> **Konum:** `Rebin_Screen/`
+> **Platform:** Raspberry Pi 5 (Debian Bookworm), Python 3.11+, Flutter (Kiosk)
+
+### Amacı ve İşlevi
+
+Rebin_Screen, fiziksel akıllı atık kutusunun tüm yazılım yığınını barındırır. Kullanıcıya yönelik dokunmatik kiosk arayüzü (Flutter), AI tabanlı sınıflandırma motoru (Python + Hailo 8 AI HAT+) ve Supabase senkronizasyon servisi (Python watchdog) bu bileşende bir arada çalışır.
+
+> ⚠️ **ÖNEMLİ:** `best_rebin.hef` modeli **yalnızca Raspberry Pi 5 üzerindeki Hailo 8 AI HAT+** donanımı ile çalışır. Standart CPU/GPU ortamlarında çalışmaz ve bu platform dışında başlatılamaz.
+
+### Alt Dizin: `REBIN/` — AI Çıkarım Motoru
+
+| Dosya | Açıklama |
+|-------|----------|
+| `inference_hailo.py` | **Ana AI motoru.** `best_rebin.hef` modelini Hailo 8 AI HAT+ üzerinde çalıştıran `HailoClassifier` sınıfını içerir. YOLOv8/v10 çıkış formatlarını otomatik algılar; ~5–15 ms gecikmeyle cam, metal, kağıt, plastik sınıflandırması yapar. |
+| `headless_hailo.py` | **Headless mod kontrolcüsü.** Terminal tabanlı canlı gösterge tablosu ile Hailo AI HAT+ dedektörünü yönetir; Groq/bulut bağımlılığı sıfırdır, tüm çıkarım yerel modelde yapılır. |
+| `inference_core.py` | **Ortak altyapı modülü.** ONNX Runtime oturumu yönetimi, Picamera2 kamera başlatma, UARTManager (motor/kapak kontrolü) ve frame-level ön işleme fonksiyonlarını sağlar. |
+| `supabase_updater.py` | **Canlı doluluk güncelleyicisi.** Her sınıflandırmada `rebins` tablosundaki ilgili `occupancy_*` alanını `+0.02` artırarak günceller; değeri `[0.0, 1.0]` aralığında tutar ve ISO 8601 timestamp atar. |
+| `gui_hailo.py` | Geliştirme ve sunum ortamları için görsel çerçeveli (OpenCV pencereli) GUI modu. |
+| `rebin_detector.service` | AI dedektör servisini açılışta otomatik başlatan systemd unit dosyası. |
+| `setup.sh` | `picamera2`, `opencv`, `numpy`, `pyserial`, `libgpiod` ve Hailo Python SDK'yı kuran otomatik kurulum betiği. |
+| `run_hailo.sh` | Headless veya GUI modunu argümanla başlatan yardımcı betik. |
+
+**Temel Fonksiyonlar (`inference_hailo.py`):**
+
+| Fonksiyon / Sınıf | İşlev |
+|-------------------|-------|
+| `HailoClassifier.__init__()` | HEF dosyasını bulur, Hailo Runtime (HailoRT) bağlamını açar ve ağırlıkları AI HAT+'a yükler |
+| `HailoClassifier.classify()` | Bir veya iki kamera karesi alır; ROI kırpar, ön işler ve HailoRT üzerinden NMS uygulayarak `(material, explanation)` döndürür |
+| `_find_hef()` | `best_rebin.hef` dosyasını bilinen konumlarda otomatik arar |
+| `SupabaseBinUpdater.update_material()` | Tespit edilen atık türü için Supabase `rebins` tablosunu PATCH metoduyla günceller |
+
+### Alt Dizin: `Ekran/` — Kiosk Kullanıcı Arayüzü
+
+| Dosya | Açıklama |
+|-------|----------|
+| `server.py` | **Kiosk HTTP sunucusu.** 1280×720 Flutter UI'ya statik dosyaları sunar; `/events` endpoint'i üzerinden SSE (Server-Sent Events) yayınlar; kamera ve sınıflandırma olaylarını gerçek zamanlı olarak kiosk ekranına iletir. `IDLE_TIMEOUT_TO_HOME_SECONDS` parametresiyle otomatik ana ekran dönüşü sağlar. |
+| `home_screen.dart` | Kullanıcıyı karşılayan ana kiosk ekranı; bağlı kutunun doluluk oranlarını daire grafikleri ile gösterir ve kullanıcıyı atık bırakmaya yönlendirir. |
+| `rebin_detail_screen.dart` | **Sınıflandırma akışını yöneten ekran.** Üç aşamada çalışır: (1) *Bekleme* — kamera aktif; (2) *İşleniyor* — CSS spin animasyonu eşliğinde AI sınıflandırma bekleniyor; (3) *Sonuç* — 10 saniyelik dairesel geri sayım, çekilen fotoğraf ve doğruluk oranı gösterimi. Supabase Realtime ile güncel doluluk bilgilerini canlı alır. |
+| `camera_detector_bridge.py` | Hailo AI çıkarım motoru ile kiosk Flutter UI arasında SSE olay köprüsü kurar. |
+| `simulate_classification.py` | Gerçek donanım olmaksızın sınıflandırma akışını simüle etmek için geliştirme aracı. |
+| `start_kiosk.sh` | Chromium'u tam ekran kiosk modunda başlatan ve servisleri sıralayan otomatik başlatma betiği. |
+| `setup_display_rotation.sh` | Raspberry Pi ekranını dikey (portrait) moda döndürmek için yapılandırma betiği. |
+
+### Alt Dizin: `rebin_tracker/` — Watchdog & Supabase Sync Daemon
+
+> Raspberry Pi arka plan servisi: kamera çıktılarını izler, Supabase Storage'a yükler ve `bin_images` tablosuna kayıt açar.
+
+| Dosya | Açıklama |
+|-------|----------|
+| `main.py` | **Servis giriş noktası.** `--watch-dir`, `--bin-id`, `--action` argümanlarını alır; `RebinWatcherDaemon`'ı başlatır; `SIGINT`/`SIGTERM` sinyallerini yakalayarak temiz kapanma sağlar. |
+| `watcher.py` | **Watchdog dosya izleyici.** `watchdog.Observer` ile belirlenen dizini dinler; yeni `.jpg/.png/.webp` dosyası oluştuğunda dosyanın yazımının tamamlanmasını bekler (`wait_for_file_settled`), ardından işlem kuyruğuna ekler. |
+| `uploader.py` | **Supabase senkronizasyon yöneticisi.** `SupabaseSyncManager` sınıfı, Supabase Python SDK veya doğrudan REST API üzerinden üstel geri çekilme (exponential backoff) ile Storage yüklemesi ve `bin_images` tablosu kaydı gerçekleştirir. |
+| `parser.py` | Dosya adını parse eder; `WasteModelOutput(waste_type, confidence, raw_timestamp, file_extension)` veri yapısını üretir. |
+| `config.py` | `.env` dosyasından `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `BUCKET_NAME`, `CURRENT_BIN_ID`, `WATCH_DIRECTORY` ve retry parametrelerini yükleyen frozen dataclass yapısı. |
+| `rebin-tracker.service` | Servisi açılışta başlatan, hata durumunda 5 saniyede bir yeniden başlatan systemd unit dosyası. |
+| `requirements.txt` | Python bağımlılıkları: `supabase>=2.3.0`, `watchdog>=4.0.0`, `python-dotenv>=1.0.0`, `requests>=2.31.0`. |
 
 ---
 
-### C. Mobil Saha & Yönetici Arayüzü
-Saha toplama personeli ve şoförlerin kullandığı mobil arayüz:
+## B. Rebin_Web — Yönetim Web Paneli
 
-1. **Bölge Bazlı Optimize Toplama Rotası:**
-   - Şoförün bulunduğu depodan başlayan, kritik doluluktaki kutuları en kısa sürede toplayıp en yakın geri dönüşüm tesisine ulaştıran adım adım rota navigasyonu.
-2. **Güvenli Doluluk Oranları (%10 Filtreli Veri):**
-   - Hatalı ölçüm ve dik düşen atık dalgalanmalarından arındırılmış, veritabanı trigger korumalı net hacim oranları.
-3. **Kutu QR Kod Doğrulama:**
-   - Saha personeli kutu yanına vardığında kutu üzerindeki dinamik QR kodu taratarak boşaltım işlemini onaylar ve doluluk oranını sıfırlar.
+> **Konum:** `Rebin_Web/`
+> **Platform:** React 19 + Vite 8 + TailwindCSS + Leaflet
+> **Çalıştırma:** `npm run dev` → `http://localhost:5173`
+
+### Amacı ve İşlevi
+
+Rebin_Web, belediye yöneticileri ve saha ekip liderlerine yönelik gerçek zamanlı yönetim panelidir. Tüm Rebin kutularının doluluk durumları, hata kayıtları, depo ve tesis konumları ile araç filo rotaları tek bir arayüzde yönetilir.
+
+### Sayfa ve Bileşen Dosyaları
+
+#### 📄 Sayfalar (`src/pages/`)
+
+| Sayfa | Dosya | Açıklama |
+|-------|-------|----------|
+| **Kutular** | `KutularPage.jsx` | Sistemdeki tüm Rebin kutularını kart görünümünde listeler. Doluluk oranına (`Kritik ≥%85`, `Yüksek ≥%75`, `Orta ≥%50`, `Düşük <%50`) ve güncelleme tarihine göre çift yönlü filtreleme sunar. QR kodu ile yeni kutu ekleme ve arızalı kutulara "ARIZALI!" rozeti gösterimi içerir. |
+| **Harita** | `HaritaPage.jsx` | Leaflet tabanlı interaktif harita. Supabase `depolar` tablosundan çekilen depolar **mavi bina ikonu**, `tesisler` tablosundan çekilen tesisler **yeşil ♻️ ikonu** ile işaretlenir. Kutular doluluk yüzdesine göre renklenir; arızalı kutuların pininde kırmızı `!` rozeti görünür. Şehir ve semt bazlı dinamik filtreleme mevcuttur. |
+| **Yönetim** | `YonetimPage.jsx` | **En kapsamlı sayfa.** Harita üzerinde depo bazlı araç filo yönetimi, dolu kutuların rota optimizasyonu (OSRM + Held-Karp DP + 2-Opt + Simulated Annealing) ve anlık araç takip widget'ı içerir. Filo takip paneli ekranın sağ alt köşesinde konumlandırılmıştır. |
+| **Kutu Detay** | `BinDetailPage.jsx` | Tek bir kutunun dört atık türü için dairesel doluluk grafikleri, AI sınıflandırma fotoğrafları ve hata kayıtları görüntülenir. Hata türleri: *algılamıyor, sınıflandırmıyor, ayrıştırmıyor, diğer*. Kutunun aktif/pasif durumu toggle ile değiştirilip, saha ekibine görev bildirimi oluşturulabilir. |
+| **İletişim** | `IletisimPage.jsx` | Kullanıcı destek ve geri bildirim formu sayfası. |
+
+#### 🧩 Bileşenler (`src/components/`)
+
+| Bileşen | Dosya | Açıklama |
+|---------|-------|----------|
+| **BinCard** | `BinCard.jsx` | Kutu listesinde her kutu için mini doluluk çubukları, tip etiketi, semt ve arıza durumunu gösteren kart bileşeni. |
+| **CircularProgress** | `CircularProgress.jsx` | SVG tabanlı dairesel ilerleme göstergesi; atık türü renklerini otomatik uygular. |
+| **CitySelector** | `CitySelector.jsx` | Ankara / İstanbul şehir seçimi için açılır menü; harita ve yönetim sayfalarında paylaşılır. |
+| **Navbar** | `Navbar.jsx` | Dört sekme (Kutular, Harita, Yönetim, İletişim) arası gezinti çubuğu. |
+| **LoadingSpinner** | `LoadingSpinner.jsx` | Veri yükleme sırasında gösterilen CSS spin animasyonlu yükleme göstergesi. |
+
+#### ⚙️ Servisler (`src/services/`)
+
+| Servis | Dosya | Açıklama |
+|--------|-------|----------|
+| **Supabase** | `supabase.js` | Tüm Supabase CRUD operasyonlarını kapsayan merkezi servis. `fetchBins()`, `fetchBinById()`, `fetchBinImages()`, `fetchBinErrors()`, `fetchAllDepolar()`, `fetchAllTesisler()`, `fetchDepolarByCity()`, `fetchTesislerByCity()`, `clearBinErrors()`, `insertBin()`, `toggleBinActive()`, `verifyAndAddBin()` fonksiyonlarını içerir. |
+| **OSRM** | `osrm.js` | OSRM (Open Source Routing Machine) Table API'sinden NxN gerçek yol seyahat süresi matrisi çeker; `formatDistance()` ve `formatDuration()` yardımcı fonksiyonlarını sunar. |
+| **Rota Optimizasyon** | `routeOptimizer.js` | **Çok katmanlı optimizasyon motoru.** `N ≤ 12` durak için Held-Karp Dinamik Programlama (global minimum); 2-Opt Yerel Arama ile çapraz geçiş eliminasyonu; `N > 12` durak için Nearest-Neighbor + 2-Opt + Simulated Annealing. |
 
 ---
 
-## 3. Veritabanı Tasarımı ve Veri Modeli (Database Schema)
+## C. Rebin_Mobile — Kullanıcı Mobil Uygulaması
+
+> **Konum:** `Rebin_Mobile/`
+> **Platform:** Flutter (Dart), Android & iOS
+> **Çalıştırma:** `flutter run`
+
+### Amacı ve İşlevi
+
+Rebin_Mobile, bireylerin kendi evlerinden yakındaki Rebin kutularını takip etmelerine, atıklarını kameralarıyla taratarak sınıflandırmalarına, günlük/haftalık görevler tamamlayarak ödül kazanmalarına ve çevresel katkılarını bireysel olarak analiz etmelerine olanak tanır. Uygulama içi yerel model (TFLite / PyTorch Lite) sayesinde **internet bağlantısı olmadan da** atık sınıflandırması yapılabilir.
+
+### Ekranlar (`lib/screens/`)
+
+| Ekran | Dosya | Açıklama |
+|-------|-------|----------|
+| **Ana Sayfa** | `home_screen.dart` | `privateBinsProvider` ile bağlı Rebin kutularının doluluk oranlarını dairesel göstergelerle listeler; her ekran geçişinde provider'ı yeniler. |
+| **Kamera & Tarama** | `camera_screen.dart` | Yerel TFLite ve PyTorch Lite modellerini kullanarak gerçek zamanlı atık sınıflandırması yapar; aktif (canlı frame) ve fotoğraf modlarını destekler; yeşil parlama animasyonuyla tespit anını vurgular. |
+| **Sonuç** | `result_screen.dart` | Tarama sonucunu atık türü, güven skoru ve haftalık görev ilerlemesiyle birlikte gösterir; `weeklyTaskProvider`'ı günceller. |
+| **Harita** | `map_screen.dart` | `flutter_map` + GPS ile kullanıcının konumuna en yakın Rebin kutularını ve genel geri dönüşüm noktalarını işaretler; nabız animasyonlu konum göstergesi içerir. |
+| **Rebin Detay** | `rebin_detail_screen.dart` | Seçilen kutunun dört atık türü için ayrıntılı doluluk grafikleri ve Supabase Realtime ile canlı güncelleme sunar. |
+| **QR Tarama** | `qr_scan_screen.dart` | `mobile_scanner` ile Rebin kutusunun QR kodunu okur; kutu ID ve güvenlik kodu doğrulayıp kişisel listeye ekler. |
+| **Görevler & Başarılar** | `tasks_screen.dart` | **Günlük ve haftalık görevleri** listeler; `dailyTaskProvider` ve `weeklyTaskProvider` ile tarama sayacını takip eder; görev tamamlandığında 1 GB internet, indirim kuponu gibi ödüllerin kilidini açar. |
+| **İstatistikler & Analiz** | `statistics_screen.dart` | `fl_chart` ile bireysel katkı grafikleri sunar; toplam tarama sayısı, kurtarılan CO₂, tasarruf edilen su ve atık türü dağılım tablosunu gösterir. |
+| **Bilgi Kartları** | `info_cards_screen.dart` | Her atık kategorisi için kaydırılabilir bilgi kartları; sıfır atık ipuçları ve doğru geri dönüşüm pratiklerini anlatır. |
+| **Aktivite** | `activity_screen.dart` | Kullanıcının geçmiş tarama geçmişini kronolojik olarak listeleyen ekran. |
+| **Kutularım** | `my_bins_screen.dart` | QR ile eklenen kişisel Rebin kutularının listesi ve hızlı erişim paneli. |
+| **Oyunlar** | `games_screen.dart` | Geri dönüşüm temalı mini oyunlar için ekran (geliştirme aşamasında). |
+
+### Servisler (`lib/services/`)
+
+| Servis | Dosya | Açıklama |
+|--------|-------|----------|
+| **TFLite Servisi** | `tflite_service_mobile.dart` | `tflite_flutter` ile `best_full_integer_quant.tflite` modelini yükler; kamera karesini ön işler ve mobil cihazda yerel çıkarım gerçekleştirir. |
+| **PyTorch Servisi** | `pytorch_service.dart` | `pytorch_lite` paketi aracılığıyla alternatif PyTorch modeli çalıştırır; TFLite ile aynı arayüzü paylaşır. |
+| **Bin Database** | `bin_database_service.dart` | SQLite (`sqflite`) üzerinde yerel kutu veritabanı yönetimi; Supabase'den senkronize edilen veriler cihazda önbelleğe alınır. |
+| **Supabase** | `supabase_service.dart` | `supabase_flutter` SDK'sı üzerinden veri sorgulama ve Realtime aboneliği yönetimi. |
+| **Overpass** | `overpass_service.dart` | OpenStreetMap Overpass API'sinden en yakın genel geri dönüşüm noktalarını sorgular. |
+
+---
+
+## 3. Veritabanı Tasarımı ve Veri Modeli
 
 Sistem, **Supabase PostgreSQL** üzerinde ilişkisel veri bütünlüğü, row-level security (RLS) ve özel veritabanı tetikleyicileri ile kurgulanmıştır.
 
+### 3.1 ER Diyagramı
+
 ```mermaid
 erDiagram
-    rebins ||--o{ bin_images : "has many"
-    rebins ||--o| bin_errors : "has one"
-    depolar ||--o{ rebins : "serves"
-    tesisler ||--o{ rebins : "receives"
+   rebins ||--o{ bin_images : "has many"
+   rebins ||--o| bin_errors : "has one"
+   depolar ||--o{ rebins : "serves"
+   tesisler ||--o{ rebins : "receives"
 
     rebins {
-        varchar bin_id PK
-        varchar name
-        varchar type
+        text bin_id PK "Örn: pbin_0001"
+        text name
+        text type "'private' | 'public'"
         boolean is_active
-        varchar status
-        double_precision latitude
-        double_precision longitude
+        text status "'active' | 'out_of_order'"
+        text semt
+        float8 latitude
+        float8 longitude
         timestamptz last_updated
         timestamptz last_emptying
-        double_precision occupancy_plastic
-        double_precision occupancy_paper
-        double_precision occupancy_glass
-        double_precision occupancy_metal
-        varchar qr_image_url
-        varchar qr_token
-        varchar semt
-        varchar processing_status
+        float4 occupancy_plastic "0.0 - 1.0"
+        float4 occupancy_paper "0.0 - 1.0"
+        float4 occupancy_glass "0.0 - 1.0"
+        float4 occupancy_metal "0.0 - 1.0"
+        text qr_image_url
+        text qr_token
     }
 
     bin_images {
         uuid id PK
-        varchar bin_id FK
+        text bin_id FK
         text image_url
-        varchar waste_type
-        double_precision confidence
+        text waste_type "'plastic' | 'paper' | 'glass' | 'metal'"
+        float4 confidence
         timestamptz created_at
     }
 
     bin_errors {
-        varchar bin_id PK, FK
-        integer error_1
-        integer error_2
-        integer error_3
-        integer error_4
+        text bin_id PK,FK
+        integer error_1 "Malzemeyi algılamıyor"
+        integer error_2 "Malzemeyi sınıflandırmıyor"
+        integer error_3 "Malzemeyi ayrıştırmıyor"
+        integer error_4 "Diğer nedenler"
         timestamptz last_reported_at
     }
 
     depolar {
-        bigint id PK
-        varchar depo_adi
-        varchar semt
-        varchar city
-        double_precision latitude
-        double_precision longitude
+        serial id PK
+        text depo_adi
+        text semt
+        text city "'Ankara' | 'İstanbul'"
+        float8 latitude
+        float8 longitude
     }
 
     tesisler {
-        bigint id PK
-        varchar tesis_adi
-        varchar semt
-        varchar city
-        double_precision latitude
-        double_precision longitude
+        serial id PK
+        text tesis_adi
+        text semt
+        text city
+        float8 latitude
+        float8 longitude
     }
+
 ```
 
 ---
 
-### 3.1 Tablo Yapıları ve Alan Tanımları
+### 3.2 Tablo Şeması
 
-#### 1. `rebins` Tablosu (Ana Kutu Varlığı)
-Akıllı kutuların operasyonel durumunu, anlık doluluklarını ve koordinatlarını tutar.
+#### `rebins` — Ana Kutu Tablosu
+
 ```sql
-CREATE TABLE public.rebins (
-    bin_id VARCHAR(64) PRIMARY KEY,
-    name VARCHAR(128) NOT NULL,
-    type VARCHAR(32) DEFAULT 'public', -- 'public' veya 'private'
-    is_active BOOLEAN DEFAULT true,
-    status VARCHAR(32) DEFAULT 'active', -- 'active', 'out_of_order'
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    last_updated TIMESTAMPTZ DEFAULT timezone('utc'::text, now()),
-    last_emptying TIMESTAMPTZ,
-    occupancy_plastic DOUBLE PRECISION DEFAULT 0.0 CHECK (occupancy_plastic BETWEEN 0.0 AND 1.0),
-    occupancy_paper DOUBLE PRECISION DEFAULT 0.0 CHECK (occupancy_paper BETWEEN 0.0 AND 1.0),
-    occupancy_glass DOUBLE PRECISION DEFAULT 0.0 CHECK (occupancy_glass BETWEEN 0.0 AND 1.0),
-    occupancy_metal DOUBLE PRECISION DEFAULT 0.0 CHECK (occupancy_metal BETWEEN 0.0 AND 1.0),
-    qr_image_url TEXT,
-    qr_token VARCHAR(128),
-    semt VARCHAR(64),
-    processing_status VARCHAR(32) DEFAULT 'waiting' -- 'waiting', 'processing', 'result'
+CREATE TABLE rebins (
+  bin_id            TEXT PRIMARY KEY,           -- Örn: "pbin_0001"
+  name              TEXT NOT NULL,
+  type              TEXT,                       -- "private" | "public"
+  is_active         BOOLEAN DEFAULT TRUE,
+  status            TEXT DEFAULT 'active',      -- "active" | "out_of_order"
+  semt              TEXT,
+  latitude          FLOAT8,
+  longitude         FLOAT8,
+  last_updated      TIMESTAMPTZ DEFAULT NOW(),
+  last_emptying     TIMESTAMPTZ,
+  occupancy_plastic FLOAT4 DEFAULT 0.0,         -- 0.0 – 1.0
+  occupancy_paper   FLOAT4 DEFAULT 0.0,
+  occupancy_glass   FLOAT4 DEFAULT 0.0,
+  occupancy_metal   FLOAT4 DEFAULT 0.0,
+  qr_image_url      TEXT,
+  qr_token          TEXT
 );
+
 ```
 
-#### 2. `bin_images` Tablosu (Atık Fotoğrafları ve Çıkarım Kayıtları)
+#### `bin_images` — AI Sınıflandırma Fotoğraf Kaydı
+
 ```sql
-CREATE TABLE public.bin_images (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    bin_id VARCHAR(64) REFERENCES public.rebins(bin_id) ON DELETE CASCADE,
-    image_url TEXT NOT NULL,
-    waste_type VARCHAR(32) NOT NULL, -- 'plastic', 'paper', 'glass', 'metal'
-    confidence DOUBLE PRECISION NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now())
+CREATE TABLE bin_images (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  bin_id      TEXT REFERENCES rebins(bin_id),
+  image_url   TEXT NOT NULL,                       -- Supabase Storage public URL
+  waste_type  TEXT NOT NULL,                       -- "plastic" | "paper" | "glass" | "metal"
+  confidence  FLOAT4,                              -- 0.0 – 1.0
+  created_at  TIMESTAMPTZ DEFAULT NOW()
 );
+
 ```
 
-#### 3. `bin_errors` Tablosu (Donanım Arıza Sayaçları)
+#### `bin_errors` — Donanım Hata Kayıtları
+
 ```sql
-CREATE TABLE public.bin_errors (
-    bin_id VARCHAR(64) PRIMARY KEY REFERENCES public.rebins(bin_id) ON DELETE CASCADE,
-    error_1 INTEGER DEFAULT 0, -- Malzeme algılanmama hatası
-    error_2 INTEGER DEFAULT 0, -- Sınıflandırma hatası
-    error_3 INTEGER DEFAULT 0, -- Ayrıştırma/motor hatası
-    error_4 INTEGER DEFAULT 0, -- Diğer donanım/sensör hataları
-    last_reported_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now())
+CREATE TABLE bin_errors (
+  bin_id           TEXT PRIMARY KEY REFERENCES rebins(bin_id),
+  error_1          INTEGER DEFAULT 0,              -- Malzemeyi algılamıyor
+  error_2          INTEGER DEFAULT 0,              -- Malzemeyi sınıflandırmıyor
+  error_3          INTEGER DEFAULT 0,              -- Malzemeyi ayrıştırmıyor
+  error_4          INTEGER DEFAULT 0,              -- Diğer nedenler
+  last_reported_at TIMESTAMPTZ DEFAULT NOW()
 );
+
 ```
 
-#### 4. `depolar` ve `tesisler` Tabloları (Lojistik Altyapı)
+#### `depolar` — Atık Toplama Depo Koordinatları
+
 ```sql
-CREATE TABLE public.depolar (
-    id BIGSERIAL PRIMARY KEY,
-    depo_adi VARCHAR(128) NOT NULL,
-    semt VARCHAR(64) NOT NULL,
-    city VARCHAR(64) NOT NULL,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL
+CREATE TABLE depolar (
+  id        SERIAL PRIMARY KEY,
+  depo_adi  TEXT NOT NULL,
+  semt      TEXT,
+  city      TEXT,                                 -- "Ankara" | "İstanbul"
+  latitude  FLOAT8,
+  longitude FLOAT8
 );
 
-CREATE TABLE public.tesisler (
-    id BIGSERIAL PRIMARY KEY,
-    tesis_adi VARCHAR(128) NOT NULL,
-    semt VARCHAR(64) NOT NULL,
-    city VARCHAR(64) NOT NULL,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL
+```
+
+#### `tesisler` — Geri Dönüşüm Tesisi Koordinatları
+
+```sql
+CREATE TABLE tesisler (
+  id        SERIAL PRIMARY KEY,
+  tesis_adi TEXT NOT NULL,
+  semt      TEXT,
+  city      TEXT,
+  latitude  FLOAT8,
+  longitude FLOAT8
 );
+
 ```
 
 ---
 
-### 3.2 Aktif SQL Tetikleyicileri (Triggers)
+### 3.3 SQL Trigger'lar ve Güvenlik Kuralları
 
-#### 1. Ani Kapasite Sıçramalarını Engelleyen Trigger (`check_capacity_increase_limit`)
-Sensör önüne atığın dik düşmesi veya geçici hatalı okumalarda kapasitenin tek bir adımda mantıksız şekilde artmasını önler:
+#### `check_capacity_increase_limit` — Ani Doluluk Artışı Koruyucusu
+
+> Ani düşen atıkların tek seferde %10'dan fazla yalancı kapasite artışı kaydetmesini önler.
+
 ```sql
-CREATE OR REPLACE FUNCTION public.validate_capacity_increase()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Boşaltım işlemi (azalma) her zaman serbesttir
-    -- Ancak tek ölçümde %10'dan (0.10) fazla artış sensör anomalisi sayılarak filtrelenir
-    IF (NEW.occupancy_plastic > OLD.occupancy_plastic + 0.10) THEN
-        NEW.occupancy_plastic := OLD.occupancy_plastic + 0.10;
-    END IF;
-    IF (NEW.occupancy_paper > OLD.occupancy_paper + 0.10) THEN
-        NEW.occupancy_paper := OLD.occupancy_paper + 0.10;
-    END IF;
-    IF (NEW.occupancy_glass > OLD.occupancy_glass + 0.10) THEN
-        NEW.occupancy_glass := OLD.occupancy_glass + 0.10;
-    END IF;
-    IF (NEW.occupancy_metal > OLD.occupancy_metal + 0.10) THEN
-        NEW.occupancy_metal := OLD.occupancy_metal + 0.10;
-    END IF;
-
-    NEW.last_updated := now();
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION check_capacity_increase_limit()
+RETURNS TRIGGER AS $$ BEGIN   IF (NEW.occupancy_plastic - OLD.occupancy_plastic) > 0.10 THEN     NEW.occupancy_plastic := OLD.occupancy_plastic + 0.10;   END IF;   IF (NEW.occupancy_paper - OLD.occupancy_paper) > 0.10 THEN     NEW.occupancy_paper := OLD.occupancy_paper + 0.10;   END IF;   IF (NEW.occupancy_glass - OLD.occupancy_glass) > 0.10 THEN     NEW.occupancy_glass := OLD.occupancy_glass + 0.10;   END IF;   IF (NEW.occupancy_metal - OLD.occupancy_metal) > 0.10 THEN     NEW.occupancy_metal := OLD.occupancy_metal + 0.10;   END IF;   RETURN NEW; END; $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER check_capacity_increase_limit
-BEFORE UPDATE OF occupancy_plastic, occupancy_paper, occupancy_glass, occupancy_metal
-ON public.rebins
-FOR EACH ROW
-EXECUTE FUNCTION public.validate_capacity_increase();
+BEFORE UPDATE ON rebins
+FOR EACH ROW EXECUTE FUNCTION check_capacity_increase_limit();
+
 ```
 
-#### 2. Arıza Durumunda Otomatik Servis Dışı Bırakma (`update_bin_status_on_error`)
-`bin_errors` tablosunda herhangi bir arıza sayacı 0'dan büyük olduğunda ilişkili kutuyu otomatik olarak `out_of_order` moduna alır:
+#### `update_bin_status_on_error` — Arıza Durumu Otomatik Tetikleyici
+
+> `bin_errors` tablosuna yeni hata kaydı eklendiğinde ilgili kutunun `status` alanını otomatik `'out_of_order'` yapar.
+
 ```sql
-CREATE OR REPLACE FUNCTION public.sync_bin_fault_status()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF (NEW.error_1 > 0 OR NEW.error_2 > 0 OR NEW.error_3 > 0 OR NEW.error_4 > 0) THEN
-        UPDATE public.rebins SET status = 'out_of_order' WHERE bin_id = NEW.bin_id;
-    ELSE
-        UPDATE public.rebins SET status = 'active' WHERE bin_id = NEW.bin_id;
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION update_bin_status_on_error()
+RETURNS TRIGGER AS $$ BEGIN   UPDATE rebins SET status = 'out_of_order' WHERE bin_id = NEW.bin_id;   RETURN NEW; END; $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_bin_status_on_error
-AFTER INSERT OR UPDATE OF error_1, error_2, error_3, error_4
-ON public.bin_errors
-FOR EACH ROW
-EXECUTE FUNCTION public.sync_bin_fault_status();
+AFTER INSERT OR UPDATE ON bin_errors
+FOR EACH ROW EXECUTE FUNCTION update_bin_status_on_error();
+
 ```
 
 ---
 
-### 3.3 Depolama (Storage) ve RLS Politikaları
-Supabase Storage üzerinde `REBIN-IMAGES` kovası oluşturulmuştur:
-- **Allow Public Select:** Atık fotoğraflarının dashboard ve mobil arayüzlerde önizlenebilmesi için genel okuma erişimi açıktır.
-- **Allow Public Insert:** Raspberry Pi donanım servisinin API key ile yeni yakalanan fotoğrafları yükleyebilmesi için güvenli yazma yetkisi tanımlanmıştır.
+### 3.4 Storage — RLS Politikaları (`rebin-images` Bucket)
 
 ```sql
--- Storage RLS Politikası Örneği
-CREATE POLICY "Allow Public Select on REBIN-IMAGES"
+-- Herkese okuma izni (Public URL ile erişim)
+CREATE POLICY "Allow Public Select"
 ON storage.objects FOR SELECT
 USING (bucket_id = 'rebin-images');
 
-CREATE POLICY "Allow Public Insert on REBIN-IMAGES"
+-- Servislerden yükleme izni
+CREATE POLICY "Allow Public Insert"
 ON storage.objects FOR INSERT
 WITH CHECK (bucket_id = 'rebin-images');
 ```
 
----
+### 3.5 Veri Akışı Özeti
 
-## 4. Kamu Sistemleri ve REST/OGC API Entegrasyon Potansiyeli
-
-Rebin mimarisi; yerel yönetimlerin mevcut Coğrafi Bilgi Sistemleri (CBS / GIS) ve kamu atık takip portalları ile çift yönlü veri alışverişi yapabilecek şekilde standartlaştırılmıştır.
-
-### 4.1 Açık Standartlar ve Veri Biçimleri
-- **JSON & GeoJSON Payload:** Tüm konum ve rota çıktıları OGC (Open Geospatial Consortium) standartlarında `Point`, `LineString` ve `FeatureCollection` formatında servis edilebilir.
-- **WGS84 (EPSG:4326):** Küresel GPS koordinat standardı ile tam uyumluluk.
-- **ISO 8601 Zaman Formatı:** Zaman damgaları UTC bazında `YYYY-MM-DDTHH:mm:ss.sssZ` formatında işlenir.
-
-#### Örnek REST API Çıktısı (`GET /api/v1/bins/{bin_id}`)
-```json
-{
-  "bin_id": "BIN-3401",
-  "name": "Kadıköy Rıhtım Akıllı Ünite",
-  "status": "active",
-  "location": {
-    "type": "Point",
-    "coordinates": [29.0234, 40.9912],
-    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }
-  },
-  "occupancy": {
-    "plastic": 0.74,
-    "paper": 0.32,
-    "glass": 0.58,
-    "metal": 0.15,
-    "average": 0.4475
-  },
-  "last_updated": "2026-09-11T14:35:10.000Z",
-  "errors": {
-    "has_fault": false,
-    "total_error_count": 0
-  }
-}
+```
+Hailo AI HAT+ sınıflandırır
+       │
+       ├─► supabase_updater.py: PATCH rebins SET occupancy_* += 0.02
+       │         └─► check_capacity_increase_limit TRIGGER (maks +%10)
+       │
+       └─► rebin_tracker watchdog fotoğrafı yükler
+                 ├─► Storage: rebin-images/{bin_id}/{type}_{conf}_{ts}.jpg
+                 └─► INSERT bin_images (image_url, waste_type, confidence)
+                              │
+                              ▼
+                     Supabase Realtime
+                  ┌──────┴──────┐
+                  ▼             ▼
+              Rebin_Web   Rebin_Mobile
 ```
 
-### 4.2 Belediye CBS/GIS ve SABS Entegrasyonu
-1. **Sıfır Atık Bilgi Sistemi (SABS) Uyumu:**
-   - Çevre, Şehircilik ve İklim Değişikliği Bakanlığı Sıfır Atık Bilgi Sistemi'ne periyodik olarak toplanan atık cinsi ve hacim/ağırlık verileri otomatik aktarılabilir.
-2. **Belediye Akıllı Kent Otomasyonu (OGC SensorThings / WFS):**
-   - Belediye kriz ve operasyon merkezleri, Rebin verilerini WFS (Web Feature Service) veya REST API üzerinden doğrudan ArcGIS, Netcad, QGIS ve Kent Bilgi Sistemi (KBS) katmanlarına entegre edebilir.
+---
+
+## 4. Kamu Sistemleri ve API Entegrasyon Potansiyeli
+
+### 4.1 Açık Standartlar ve Veri Formatları
+
+- **JSON Payload:** Tüm API yanıtları `Content-Type: application/json` ile sunulur.
+- **Zaman Damgaları:** ISO 8601 formatı (`TIMESTAMPTZ`, örn. `2026-09-13T03:21:05+03:00`).
+- **Coğrafi Koordinatlar:** WGS84 standardı (`latitude/longitude` float çifti).
+
+### 4.2 Mevcut REST Endpoint'leri (Supabase PostgREST)
+
+```http
+# Tüm aktif kutuları listele
+GET /rest/v1/rebins?is_active=eq.true&select=*
+
+# Şehre göre depoları filtrele
+GET /rest/v1/depolar?city=ilike.Ankara&select=id,depo_adi,latitude,longitude
+
+# Hata kayıtlarını sorgula
+GET /rest/v1/bin_errors?bin_id=eq.pbin_0001
+
+# Doluluk güncelle (donanım servisi)
+PATCH /rest/v1/rebins?bin_id=eq.pbin_0001
+Content-Type: application/json
+{ "occupancy_plastic": 0.42, "last_updated": "2026-09-13T00:00:00Z" }
+```
+
+### 4.3 Belediye ve CBS Entegrasyon Potansiyeli
+
+| Hedef Sistem | Entegrasyon Yöntemi |
+|--------------|---------------------|
+| **Sıfır Atık Bilgi Sistemi (SABS)** | Supabase PostgREST REST API → SABS veri giriş endpoint'leri |
+| **Coğrafi Bilgi Sistemi (CBS/GIS)** | WGS84 koordinatlar + OGC WFS/WMS uyumlu GeoJSON ihracı |
+| **Akıllı Kent Platformları** | MQTT broker entegrasyonu ile `occupancy_*` verileri push |
+| **Belediye ERP Sistemleri** | `depolar` ve `tesisler` tablolarından JSON REST export |
 
 ---
 
-## 5. Kurulum ve Çalıştırma Rehberi (Installation Guide)
+## 5. Kurulum ve Çalıştırma Rehberi
 
-### A. Donanım Servisi Kurulumu (Raspberry Pi 5)
+---
 
-#### 1. Gereksinimler
-- Raspberry Pi OS (64-bit Bookworm önerilir)
-- Python 3.10+ ve virtualenv
-- Pi Camera Module v2 / v3 veya USB UVC Kamera
+### A. 🧠 Rebin_Screen — AI Dedektör Servisi (Raspberry Pi 5)
 
-#### 2. Kurulum Adımları
+#### Gereksinimler
+
+- Raspberry Pi 5 (4 GB RAM önerilir)
+- **Hailo 8 AI HAT+** ⚠️ (PCIe bağlantılı — zorunlu)
+- NIR Kamera Modülü (Picamera2 uyumlu)
+- Raspberry Pi OS Bookworm (64-bit)
+- Python 3.11+
+
+#### 1. Kurulum
+
 ```bash
-# Depoyu klonlayın
-git clone https://github.com/username/rebin.git
-cd rebin/rebin-pi-service
+# Projeyi klonla
+git clone <repo-url>
+cd REBIN/Rebin_Screen/REBIN
 
-# Python sanal ortamını oluşturun ve aktifleştirin
+# Hailo AI HAT+ ve sistem paketlerini kur
+chmod +x setup.sh
+./setup.sh
+
+# Hailo Python SDK kurulumu (internet bağlantısı gerektirir)
+pip3 install --break-system-packages hailo-all
+# Veya: https://www.raspberrypi.com/documentation/accessories/ai-hat.html
+```
+
+#### 2. Ortam Değişkenleri
+
+```bash
+cp /home/rebin/Desktop/Ekran/.env.example .env
+nano .env
+```
+
+```dotenv
+SUPABASE_URL=https://spmyeaixfdiohkmmfvgu.supabase.co
+SUPABASE_ANON_KEY=<your_supabase_anon_key>
+BIN_ID=pbin_0001
+```
+
+#### 3. AI Dedektörü Başlat
+
+```bash
+chmod +x run_hailo.sh
+
+# Headless (terminal) modunda çalıştır
+./run_hailo.sh headless
+
+# GUI modunda çalıştır (geliştirme)
+./run_hailo.sh gui
+
+# Doğrudan çalıştırma
+python3 headless_hailo.py --conf-threshold 0.50 --port /dev/ttyACM0
+```
+
+#### 4. Systemd Servisi Olarak Kur
+
+```bash
+sudo cp rebin_detector.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable rebin_detector.service
+sudo systemctl start rebin_detector.service
+
+# Durum kontrolü
+sudo systemctl status rebin_detector.service
+```
+
+---
+
+### B. 📊 Rebin_Screen — Watchdog & Supabase Sync Daemon
+
+```bash
+cd REBIN/Rebin_Screen/rebin_tracker
+
+# 1. Sanal ortam oluştur
 python3 -m venv venv
 source venv/bin/activate
 
-# Gerekli kütüphaneleri yükleyin
-pip install --upgrade pip
+# 2. Bağımlılıkları yükle
 pip install -r requirements.txt
 
-# Çevre değişkenlerini hazırlayın (.env)
-cat <<EOF > .env
-SUPABASE_URL=https://spmyeaixfdiohkmmfvgu.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_or_anon_key
-BIN_ID=BIN-0001
-IMAGE_WATCH_DIR=/home/pi/rebin_captures
-EOF
+# 3. .env dosyasını yapılandır
+cp .env.example .env
+nano .env
+# SUPABASE_URL, SUPABASE_ANON_KEY, CURRENT_BIN_ID, WATCH_DIRECTORY
 
-# Servisi test amaçlı başlatın
-python main.py
+# 4. Daemon'ı çalıştır
+python main.py --watch-dir /home/pi/rebin_captures --bin-id pbin_0001 --action delete
 ```
 
-#### 3. Arka Plan Servisi (systemd) Kurulumu: `rebin-tracker.service`
-Servisin cihaz açıldığında otomatik başlaması için:
+#### Systemd Servisi
+
 ```bash
-sudo nano /etc/systemd/system/rebin-tracker.service
+sudo cp rebin-tracker.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable rebin-tracker.service
+sudo systemctl start rebin-tracker.service
+
+# Log takibi
+journalctl -u rebin-tracker.service -f
 ```
-Aşağıdaki içeriği yapıştırın:
+
+`rebin-tracker.service` dosyası:
+
 ```ini
 [Unit]
-Description=Rebin Raspberry Pi Smart Waste Tracking & AI Service
-After=network.target
+Description=REBIN Camera Watcher & Supabase Image Sync Service (Raspberry Pi 5)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
 User=pi
-WorkingDirectory=/home/pi/rebin/rebin-pi-service
-ExecStart=/home/pi/rebin/rebin-pi-service/venv/bin/python main.py
+WorkingDirectory=/home/pi/rebin_tracker
+ExecStart=/home/pi/rebin_tracker/venv/bin/python /home/pi/rebin_tracker/main.py
 Restart=always
 RestartSec=5
-EnvironmentFile=/home/pi/rebin/rebin-pi-service/.env
+Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
 ```
-Servisi etkinleştirin ve başlatın:
+
+---
+
+### C. ♻️ Rebin_Screen — Kiosk Arayüzü
+
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl enable rebin-tracker.service
-sudo systemctl start rebin-tracker.service
-sudo systemctl status rebin-tracker.service
+cd REBIN/Rebin_Screen/Ekran
+
+# .env dosyasını yapılandır
+cp .env.example .env
+nano .env
+
+# Python HTTP sunucusunu başlat
+python3 server.py
+
+# Chromium kiosk modunda başlat (ayrı terminal)
+chromium-browser --kiosk --noerrdialogs --disable-infobars http://localhost:8080
+
+# Tüm servisleri otomatik başlat
+chmod +x start_kiosk.sh
+./start_kiosk.sh
 ```
 
 ---
 
-### B. Web Yönetim Paneli Kurulumu
+### D. 🌍 Rebin_Web — Web Yönetim Paneli
 
-#### 1. Gereksinimler
-- Node.js (v18.0.0 veya üstü)
-- npm veya yarn / pnpm
+#### Gereksinimler
 
-#### 2. Kurulum ve Çalıştırma
+- Node.js 20+
+- npm 10+
+
 ```bash
-# Web dizinine girin
-cd rebin-web
+cd REBIN/Rebin_Web
 
-# Bağımlılıkları yükleyin
+# Bağımlılıkları yükle
 npm install
 
-# .env dosyasını oluşturun (veya mevcut config'i doğrulayın)
-cat <<EOF > .env
-VITE_SUPABASE_URL=https://spmyeaixfdiohkmmfvgu.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-EOF
-
-# Geliştirici sunucusunu ayağa kaldırın
+# Geliştirme sunucusunu başlat
 npm run dev
-```
-Uygulama varsayılan olarak `http://localhost:5173` adresinde çalışacaktır.
+# → http://localhost:5173
 
-#### 3. Production Derlemesi
-```bash
+# Üretim build (opsiyonel)
 npm run build
 npm run preview
 ```
 
 ---
 
-## 6. Kütüphaneler ve Lisanslar (Dependencies & Licensing)
+### E. 📱 Rebin_Mobile — Flutter Mobil Uygulaması
 
-| Katman | Kütüphane / Teknoloji | Sürüm | Lisans | Kullanım Amacı |
-| :--- | :--- | :--- | :--- | :--- |
-| **Python / Pi** | `supabase-py` | `^2.x` | MIT | Supabase veritabanı ve storage istemcisi |
-| **Python / Pi** | `watchdog` | `^3.x` | Apache 2.0 | Kamera yerel klasöründeki yeni görselleri izleme |
-| **Python / Pi** | `opencv-python` | `^4.x` | Apache 2.0 | Görüntü yakalama ve ön işleme |
-| **Python / Pi** | `RPi.GPIO` | `^0.7` | MIT | Servo ve motor mekanik kontrolü |
-| **Python / Pi** | `ultralytics` (YOLO) | `^8.x` | AGPL-3.0 / Enterprise | Derin öğrenme atık tespit modeli |
-| **Web Frontend** | `React` | `^19.2.8` | MIT | Reaktif kullanıcı arayüzü kütüphanesi |
-| **Web Frontend** | `Vite` | `^8.2.2` | MIT | Yeni nesil hızlı build aracı |
-| **Web Frontend** | `@supabase/supabase-js`| `^2.112.4`| MIT | Bulut veritabanı & Realtime WebSocket katmanı |
-| **Web Frontend** | `leaflet` / `react-leaflet` | `^1.9 / ^5.0`| BSD-2-Clause | İnteraktif harita ve işaretçi yönetimi |
-| **Web Frontend** | `lucide-react` | `^1.34.0` | ISC | Modern arayüz vektörel ikon seti |
-| **Web Frontend** | `axios` | `^1.20.0` | MIT | OSRM rota API HTTP istekleri |
-| **Web Frontend** | `@tailwindcss/postcss` | `^4.3.3` | MIT | Modern yardımcı sınıf tabanlı stil motoru |
+#### Gereksinimler
 
-### Lisans
-Bu proje [MIT Lisansı](LICENSE) kapsamında açık kaynak olarak lisanslanmıştır.
+- Flutter SDK 3.x (`sdk: ^3.9.0`)
+- Android Studio veya Xcode
+- Android cihaz/emülatör (Android 7.0+)
 
----
+```bash
+cd REBIN/Rebin_Mobile
 
-## 7. Demo Videosu ve Teknik Doküman Linkleri
+# Flutter bağımlılıklarını yükle
+flutter pub get
 
-* **Demo Videosu Bağlantısı:** [YouTube / Google Drive Demo Videosu](https://www.youtube.com/)
-* **Çalıştırılabilir Paket / APK:** [Releasable Package / Mobil APK](https://github.com/)
-* **Canlı Web Dashboard:** [Rebin Canlı Yönetim Paneli](https://rebin-web.vercel.app/)
-* **Proje Teknik Raporu:** [Teknik Şartname ve Jüri Değerlendirme Dosyası (PDF)](./docs/Rebin_Teknik_Rapor.pdf)
+# Bağlı cihazda çalıştır
+flutter run
+
+# Android APK build
+flutter build apk --release
+# → build/app/outputs/flutter-apk/app-release.apk
+
+# Riverpod kod üretimi
+dart run build_runner build --delete-conflicting-outputs
+```
 
 ---
 
-> **Not:** Rebin Akıllı Atık Yönetim Sistemi; yazılımı, gömülü sistem mimarisi, yapay zeka çıkarım pipeline'ı ve endüstriyel tasarımı ile tamamen yerli ve milli imkanlar hedeflenerek tasarlanmıştır.
+### F. 📊 Supabase Kurulumu (Yeni Ortam İçin)
+
+```sql
+-- 1. Tabloları oluştur (yukarıdaki şemayı kullanarak)
+
+-- 2. Supabase Dashboard → Storage → New Bucket → "rebin-images" (Public)
+
+-- 3. RLS politikalarını uygula
+CREATE POLICY "Allow Public Select" ON storage.objects
+  FOR SELECT USING (bucket_id = 'rebin-images');
+
+CREATE POLICY "Allow Public Insert" ON storage.objects
+  FOR INSERT WITH CHECK (bucket_id = 'rebin-images');
+
+-- 4. Trigger'ları oluştur (yukarıdaki SQL bloklarını çalıştır)
+
+-- 5. Örnek kutu verisi ekle
+INSERT INTO rebins (bin_id, name, type, latitude, longitude, semt)
+VALUES ('pbin_0001', 'Test Kutusu', 'private', 41.0082, 28.9784, 'Beşiktaş');
+```
+
+---
+
+## 6. Kütüphaneler ve Lisanslar
+
+### Python (Rebin_Screen)
+
+| Kütüphane | Versiyon | Lisans | Kullanım |
+|-----------|----------|--------|----------|
+| `supabase` | ≥2.3.0 | MIT | Supabase PostgreSQL & Storage SDK |
+| `watchdog` | ≥4.0.0 | Apache 2.0 | Dosya sistemi değişiklik izleme |
+| `python-dotenv` | ≥1.0.0 | BSD-3 | `.env` ortam değişkeni yükleme |
+| `requests` / `urllib3` | ≥2.31.0 | Apache 2.0 | HTTP REST istemci |
+| `opencv-python` | Sistem | Apache 2.0 | Görüntü ön işleme |
+| `picamera2` | Sistem | BSD-2 | Raspberry Pi kamera sürücüsü |
+| `numpy` | Sistem | BSD-3 | Numerik dizi işlemleri |
+| `pyserial` | Sistem | BSD-3 | UART motor kontrolü |
+| `hailo_platform` | AI HAT+ | Hailo EULA | Hailo 8 NPU çıkarım runtime |
+| `onnxruntime` | Sistem | MIT | ONNX fallback çıkarım |
+
+### JavaScript / React (Rebin_Web)
+
+| Kütüphane | Versiyon | Lisans | Kullanım |
+|-----------|----------|--------|----------|
+| `react` / `react-dom` | ^19.2.8 | MIT | UI framework |
+| `vite` | ^8.2.2 | MIT | Build aracı ve dev sunucu |
+| `@supabase/supabase-js` | ^2.112.4 | MIT | Supabase istemci SDK |
+| `leaflet` | ^1.9.4 | BSD-2-Clause | Harita kütüphanesi |
+| `react-leaflet` | ^5.0.0 | Hibrit | React Leaflet entegrasyonu |
+| `react-router-dom` | ^7.18.2 | MIT | Client-side routing |
+| `lucide-react` | ^1.34.0 | ISC | İkon kütüphanesi |
+| `qrcode.react` | ^4.2.0 | MIT | QR kod üretimi |
+| `axios` | ^1.20.0 | MIT | HTTP istemcisi |
+
+### Dart / Flutter (Rebin_Mobile)
+
+| Kütüphane | Versiyon | Lisans | Kullanım |
+|-----------|----------|--------|----------|
+| `supabase_flutter` | ^2.8.0 | MIT | Supabase Flutter SDK |
+| `flutter_riverpod` | ^2.5.1 | MIT | State management |
+| `go_router` | ^17.2.1 | BSD-3 | Navigasyon / routing |
+| `tflite_flutter` | ^0.12.1 | Apache 2.0 | Yerel TFLite model çıkarımı |
+| `pytorch_lite` | ^2.0.5 | BSD-3 | PyTorch Lite model çıkarımı |
+| `flutter_map` | ^8.3.0 | BSD-3 | Flutter harita bileşeni |
+| `camera` | ^0.12.0+1 | BSD-3 | Kamera erişimi |
+| `mobile_scanner` | ^7.2.0 | MIT | QR kod tarama |
+| `fl_chart` | ^1.2.0 | MIT | Grafik ve istatistik |
+| `sqflite` | ^2.4.2 | MIT | Yerel SQLite veritabanı |
+| `location` | ^8.0.1 | MIT | GPS konum servisi |
+| `google_fonts` | ^8.0.2 | Apache 2.0 | Tipografi |
+| `lottie` | ^3.3.3 | MIT | JSON animasyonları |
+| `permission_handler` | ^12.0.1 | MIT | İzin yönetimi |
+
+### Proje Lisansı
+
+```
+MIT License
+
+Copyright (c) 2026 REBIN Team
+
+Bu yazılımın ve ilgili dokümantasyon dosyalarının ("Yazılım") kopyasını edinen
+herhangi bir kişiye, kullanma, kopyalama, değiştirme, birleştirme, yayınlama,
+dağıtma, alt lisanslama ve/veya Yazılımın kopyalarını satma hakları dahil olmak
+üzere, Yazılım üzerinde herhangi bir kısıtlama olmaksızın işlem yapma izni
+ücretsiz olarak verilmektedir.
+
+YAZILIM "OLDUĞU GİBİ" SAĞLANMAKTADIR.
+```
+
+---
+
+## 7. Demo Linkleri
+
+| Kaynak | Bağlantı |
+|--------|----------|
+| 🎥 Demo Videosu | [Proje Demo Videosu](https://www.youtube.com/watch?v=hlvKAUG3taQ) |
+| 📦 Android APK | [Rebin Mobile APK](https://drive.google.com/drive/folders/1Y1RdkCDDLU_3oStzXXCN_Xjaif4XnmFc) |
+
+---
+
+<div align="center">
+
+### Sistem Durum Özeti
+
+| Bileşen | Durum |
+|---------|-------|
+| Rebin_Screen — AI Dedektör (Hailo 8 HAT+) | ✅ Aktif |
+| Rebin_Screen — Kiosk UI (Flutter) | ✅ Aktif |
+| Rebin_Screen — Watchdog Sync Daemon | ✅ Aktif |
+| Rebin_Web — React Yönetim Paneli | ✅ Aktif |
+| Rebin_Mobile — Flutter Uygulaması | ✅ Aktif |
+| Supabase — PostgreSQL + Storage + Realtime | ✅ Aktif |
+
+---
+
+**R.E.B.İ.N.** — *Daha akıllı bir geri dönüşüm için teknoloji ve donanımı birleştiriyoruz.*
+
+*T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı Sıfır Atık Standartlarına uygun geliştirilmiştir.*
+
+</div>

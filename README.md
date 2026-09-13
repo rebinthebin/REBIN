@@ -4,6 +4,8 @@
 ### **Akıllı Entegre Atık Yönetim Sistemi**
 #### *Recycling Enabled Bin with Intelligence Network*
 
+#### TEKNOFEST | Sıfır Atık ve Döngüsel Ekonomi Yarışması
+
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
@@ -37,7 +39,7 @@
 
 ### 1.1 Projenin Tanımı
 
-R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork), geleneksel çöp kutusunu yapay zeka destekli, ağ bağlantılı ve kentsel yönetimle entegre bir akıllı geri dönüşüm sistemine dönüştürür. Sistem üç temel katmandan oluşur:
+R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork), geleneksel geri dönüşüm kutusunu yapay zeka destekli, ağ bağlantılı ve kentsel yönetimle entegre bir akıllı geri dönüşüm sistemine dönüştürmeyi hedefler. Sistem üç temel katmandan oluşur:
 
 | Katman | Bileşen | Teknoloji |
 |--------|---------|-----------|
@@ -46,18 +48,8 @@ R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork
 | **Mobil Uygulama** | Rebin_Mobile | Flutter + TFLite/PyTorch + Supabase |
 | **Veri Katmanı** | Supabase | PostgreSQL + Storage + Realtime |
 
-### 1.2 Sıfır Atık Standartları
 
-T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı'nın belirlediği resmi renk kodları sistemin tüm bileşenlerinde kullanılmaktadır:
-
-| Atık Türü | Renk | Hex Kodu | `occupancy_*` Alanı |
-|-----------|------|----------|---------------------|
-| 🔵 Plastik | Mavi | `#1477d4` | `occupancy_plastic` |
-| 🟡 Kağıt | Sarı | `#feb200` | `occupancy_paper` |
-| 🟢 Cam | Yeşil | `#41a047` | `occupancy_glass` |
-| 🔴 Metal | Kırmızı | `#ef524e` | `occupancy_metal` |
-
-### 1.3 Sistem Mimarisi
+### 1.2 Sistem Mimarisi
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -108,7 +100,7 @@ T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı'nın belirlediği
 
 ---
 
-## A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
+## 🟢 A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
 
 > **Konum:** `Rebin_Screen/`
 > **Platform:** Raspberry Pi 5 (Debian Bookworm), Python 3.11+, Flutter (Kiosk)
@@ -169,7 +161,7 @@ Rebin_Screen, fiziksel akıllı atık kutusunun tüm yazılım yığınını bar
 
 ---
 
-## B. Rebin_Web — Yönetim Web Paneli
+## 💻 B. Rebin_Web — Yönetim Web Paneli
 
 > **Konum:** `Rebin_Web/`
 > **Platform:** React 19 + Vite 8 + TailwindCSS + Leaflet
@@ -211,7 +203,7 @@ Rebin_Web, belediye yöneticileri ve saha ekip liderlerine yönelik gerçek zama
 
 ---
 
-## C. Rebin_Mobile — Kullanıcı Mobil Uygulaması
+## 📱 C. Rebin_Mobile — Kullanıcı Mobil Uygulaması
 
 > **Konum:** `Rebin_Mobile/`
 > **Platform:** Flutter (Dart), Android & iOS
@@ -749,9 +741,7 @@ YAZILIM "OLDUĞU GİBİ" SAĞLANMAKTADIR.
 | Kaynak | Bağlantı |
 |--------|----------|
 | 🎥 Demo Videosu | [YouTube / Drive Demo Linki Buraya] |
-| 📦 Android APK | [Release APK İndirme Linki Buraya] |
-| 🌐 Canlı Web Demo | [Vercel / Netlify Demo URL Buraya] |
-| 📄 Teknik Şartname | [Proje Teknik Şartname PDF Buraya] |
+| 📦 Android APK | (https://drive.google.com/drive/folders/1Y1RdkCDDLU_3oStzXXCN_Xjaif4XnmFc) |
 
 ---
 

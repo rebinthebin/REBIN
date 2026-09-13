@@ -243,21 +243,18 @@ Rebin_Mobile, bireylerin kendi evlerinden yakındaki Rebin kutularını takip et
 
 ## 3. Veritabanı Tasarımı ve Veri Modeli
 
-> **Platform:** Supabase (PostgreSQL 15+)
-
-```markdown
 ## 3. Veritabanı Tasarımı ve Veri Modeli (Database Schema)
 
 Sistem, **Supabase PostgreSQL** üzerinde ilişkisel veri bütünlüğü, row-level security (RLS) ve özel veritabanı tetikleyicileri ile kurgulanmıştır.
 
-### 3.1 ER Diyagramı
+## 3.1 ER Diyagramı
 
 ```mermaid
 erDiagram
-    rebins ||--o{ bin_images : "has many"
-    rebins ||--o| bin_errors : "has one"
-    depolar ||--o{ rebins : "serves"
-    tesisler ||--o{ rebins : "receives"
+   rebins ||--o{ bin_images : "has many"
+   rebins ||--o| bin_errors : "has one"
+   depolar ||--o{ rebins : "serves"
+   tesisler ||--o{ rebins : "receives"
 
     rebins {
         text bin_id PK "Örn: pbin_0001"

@@ -1,4 +1,4 @@
-<div align="center">
+<img width="476" height="106" alt="image" src="https://github.com/user-attachments/assets/bd7f1214-10f2-4d3f-a92b-f74f8bf75ba3" /><div align="center">
 
 # 🌍 R.E.B.İ.N. ♻️
 ### **Akıllı Entegre Atık Yönetim Sistemi**
@@ -24,7 +24,7 @@
 
 1. [Proje Özeti ve Mimari Bakış](#1-proje-özeti-ve-mimari-bakış)
 2. [Sistem Bileşenleri](#2-sistem-bileşenleri)
-   - [Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı](#a-rebin_screen--fiziksel-ünite--kiosk-yazılımı)
+   - [Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı](#-a-rebin_screen--fiziksel-ünite--kiosk-yazılımı)
    - [Rebin_Web — Yönetim Web Paneli](#b-rebin_web--yönetim-web-paneli)
    - [Rebin_Mobile — Kullanıcı Mobil Uygulaması](#c-rebin_mobile--kullanıcı-mobil-uygulaması)
 3. [Veritabanı Tasarımı ve Veri Modeli](#3-veritabanı-tasarımı-ve-veri-modeli)
@@ -100,7 +100,7 @@ R.E.B.İ.N. (**R**ecycling **E**nabled **B**in with **I**ntelligence **N**etwork
 
 ---
 
-## ♻️ A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
+## A. Rebin_Screen — Fiziksel Ünite & Kiosk Yazılımı
 
 > **Konum:** `Rebin_Screen/`
 > **Platform:** Raspberry Pi 5 (Debian Bookworm), Python 3.11+, Flutter (Kiosk)

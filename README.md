@@ -467,8 +467,6 @@ Hailo AI HAT+ sınıflandırır
               Rebin_Web   Rebin_Mobile
 ```
 
-```
-
 ---
 
 ## 4. Kamu Sistemleri ve API Entegrasyon Potansiyeli
